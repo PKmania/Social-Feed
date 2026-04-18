@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "365BBA8D-60F6-47A9-A6DE-F71E5CFB9235",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5DF8C4222F91FACF00388F6B",
+        "name" : "SocialFeedTests"
+      }
+    }
+  ],
+  "version" : 1
+}
