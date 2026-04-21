@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DD528912F979B82006F07D8 /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 		5DF8C4242F91FACF00388F6B /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5DD528922F979B82006F07D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DF8C4112F91FACF00388F6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5DF8C4192F91FACF00388F6B;
+			remoteInfo = SocialFeed;
+		};
 		5DF8C4252F91FACF00388F6B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DF8C4112F91FACF00388F6B /* Project object */;
@@ -21,12 +29,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5DD528882F977F79006F07D8 /* SocialFeed.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeed.xctestplan; sourceTree = "<group>"; };
+		5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF8C4232F91FACF00388F6B /* SocialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF8C50C2F91FBAB00388F6B /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SocialFeedAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
 		5DF8C41C2F91FACF00388F6B /* SocialFeed */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SocialFeed;
@@ -40,6 +55,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5DD5288A2F979B82006F07D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DD528912F979B82006F07D8 /* SocialFeed.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF8C4172F91FACF00388F6B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,9 +84,11 @@
 		5DF8C4102F91FACF00388F6B = {
 			isa = PBXGroup;
 			children = (
+				5DD528882F977F79006F07D8 /* SocialFeed.xctestplan */,
 				5DF8C50C2F91FBAB00388F6B /* CI.xctestplan */,
 				5DF8C41C2F91FACF00388F6B /* SocialFeed */,
 				5DF8C4272F91FACF00388F6B /* SocialFeedTests */,
+				5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */,
 				5DF8C41B2F91FACF00388F6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,6 +98,7 @@
 			children = (
 				5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */,
 				5DF8C4232F91FACF00388F6B /* SocialFeedTests.xctest */,
+				5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,6 +116,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DD528942F979B82006F07D8 /* Build configuration list for PBXNativeTarget "SocialFeedAPIEndToEndTests" */;
+			buildPhases = (
+				5DD528892F979B82006F07D8 /* Sources */,
+				5DD5288A2F979B82006F07D8 /* Frameworks */,
+				5DD5288B2F979B82006F07D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5DD528932F979B82006F07D8 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */,
+			);
+			name = SocialFeedAPIEndToEndTests;
+			packageProductDependencies = (
+			);
+			productName = SocialFeedAPIEndToEndTests;
+			productReference = 5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5DF8C4192F91FACF00388F6B /* SocialFeed */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5DF8C42C2F91FACF00388F6B /* Build configuration list for PBXNativeTarget "SocialFeed" */;
@@ -146,6 +195,9 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					5DD5288C2F979B82006F07D8 = {
+						CreatedOnToolsVersion = 16.3;
+					};
 					5DF8C4192F91FACF00388F6B = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -171,11 +223,19 @@
 			targets = (
 				5DF8C4192F91FACF00388F6B /* SocialFeed */,
 				5DF8C4222F91FACF00388F6B /* SocialFeedTests */,
+				5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5DD5288B2F979B82006F07D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF8C4182F91FACF00388F6B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -193,6 +253,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5DD528892F979B82006F07D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF8C4162F91FACF00388F6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +277,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5DD528932F979B82006F07D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
+			targetProxy = 5DD528922F979B82006F07D8 /* PBXContainerItemProxy */;
+		};
 		5DF8C4262F91FACF00388F6B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
@@ -218,6 +290,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		5DD528952F979B82006F07D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5DD528962F979B82006F07D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		5DF8C42A2F91FACF00388F6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,6 +542,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5DD528942F979B82006F07D8 /* Build configuration list for PBXNativeTarget "SocialFeedAPIEndToEndTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DD528952F979B82006F07D8 /* Debug */,
+				5DD528962F979B82006F07D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5DF8C4142F91FACF00388F6B /* Build configuration list for PBXProject "SocialFeed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

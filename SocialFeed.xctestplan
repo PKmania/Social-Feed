@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "173F3A81-5854-41D1-944B-64165BDDC273",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5DF8C4222F91FACF00388F6B",
+        "name" : "SocialFeedTests"
+      }
+    }
+  ],
+  "version" : 1
+}
