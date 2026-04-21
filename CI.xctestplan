@@ -9,10 +9,27 @@
     }
   ],
   "defaultOptions" : {
-
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5DF8C4192F91FACF00388F6B",
+          "name" : "SocialFeed"
+        }
+      ]
+    }
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5DD5288C2F979B82006F07D8",
+        "name" : "SocialFeedAPIEndToEndTests"
+      }
+    },
+    {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5DF8C4222F91FACF00388F6B",
