@@ -30,6 +30,10 @@ final class SocialFeedAPIEndToEndTests: XCTestCase {
 
   }
   
+  func test_endToEndTests() {
+
+  }
+  
   
   // MARK: - Helpers
 
