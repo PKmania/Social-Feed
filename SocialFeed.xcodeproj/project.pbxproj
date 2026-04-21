@@ -36,6 +36,16 @@
 		5DF8C50C2F91FBAB00388F6B /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Feed API/Helpers/XCTestCase+MemoryLeakTracking.swift",
+			);
+			target = 5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -49,6 +59,9 @@
 		};
 		5DF8C4272F91FACF00388F6B /* SocialFeedTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */,
+			);
 			path = SocialFeedTests;
 			sourceTree = "<group>";
 		};
