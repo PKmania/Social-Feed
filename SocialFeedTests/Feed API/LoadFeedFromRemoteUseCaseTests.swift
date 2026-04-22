@@ -8,7 +8,7 @@ import SocialFeed
 //xcodebuild test -project SocialFeed.xcodeproj -scheme "CI_macos"
 
 
-class RemoteFeedLoaderTests: XCTestCase {
+class LoadFeedFromRemoteUseCaseTests: XCTestCase {
   
   func test_init_doesNotRequestDataFromURL() {
     let url = URL(string: "https://any-url.com/posts")!
