@@ -35,6 +35,10 @@ class FeedStore {
     insertionCompletions[index](error)
   }
   
+  func completeInsertionSuccessfully(at index: Int = 0) {
+    insertionCompletions[index](nil)
+  }
+  
   func insert(_ items: [FeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
     insertionCompletions.append(completion)
     receivedMessages.append(.insert(items, timestamp))
@@ -138,6 +142,24 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     wait(for: [exp], timeout:  1.0)
     XCTAssertEqual(receivedError as? NSError, error)
+  }
+  
+  func test_save_sucessOnSuccessfulInsertion() {
+    let (sut, store) = makeSUT()
+    let items = [uniqueItems(), uniqueItems()]
+    
+    let exp = expectation(description: "eait for completeion")
+    
+    var receivedError: Error?
+    sut.save(items) { error in
+      receivedError = error
+      exp.fulfill()
+    }
+    store.completeDeletionSuccessfully()
+    store.completeInsertionSuccessfully()
+    
+    wait(for: [exp], timeout:  1.0)
+    XCTAssertNil(receivedError)
   }
   
   //MARK: helpers
