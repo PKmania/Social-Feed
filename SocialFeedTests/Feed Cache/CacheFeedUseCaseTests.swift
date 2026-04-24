@@ -17,19 +17,17 @@ class CacheFeedUseCaseTests: XCTestCase {
   
   func test_save_requestsCacheDeletion() {
     let (sut, store) = makeSUT()
-    let items = [uniqueItems(), uniqueItems()]
     
-    sut.save(items) {_ in }
+    sut.save(uniqueItems().model) {_ in }
     
     XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
   }
   
   func test_save_doesNotRequestCacheInsertionOnDeletionError() {
     let (sut, store) = makeSUT()
-    let items = [uniqueItems(), uniqueItems()]
     let error = anyNSError()
     
-    sut.save(items) {_ in }
+    sut.save(uniqueItems().model) {_ in }
     store.completeDeletion(with: error)
     
     XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
@@ -38,12 +36,11 @@ class CacheFeedUseCaseTests: XCTestCase {
   func test_save_requestNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
     let timestamp = Date()
     let (sut, store) = makeSUT(currentDate: { timestamp })
-    let items = [uniqueItems(), uniqueItems()]
-    let localItems = items.map { LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL)}
-    sut.save(items) {_ in }
+    let (model, localItem) = uniqueItems()
+    sut.save(model) {_ in }
     store.completeDeletionSuccessfully()
     
-    XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(localItems, timestamp)])
+    XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed, .insert(localItem, timestamp)])
 
   }
   
@@ -80,7 +77,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
     
     var receivedResult = [LocalFeedLoader.SaveResult]()
-    sut?.save([uniqueItems()]) { error in
+    sut?.save(uniqueItems().model) { error in
       receivedResult.append(error)
     }
     sut = nil
@@ -93,7 +90,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
     
     var receivedResult = [LocalFeedLoader.SaveResult]()
-    sut?.save([uniqueItems()]) { error in
+    sut?.save(uniqueItems().model) { error in
       receivedResult.append(error)
     }
     store.completeDeletionSuccessfully()
@@ -155,7 +152,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     let exp = expectation(description: "eait for completeion")
     
     var receivedError: Error?
-    sut.save([uniqueItems()]) { error in
+    sut.save(uniqueItems().model) { error in
       receivedError = error
       exp.fulfill()
     }
@@ -166,10 +163,18 @@ class CacheFeedUseCaseTests: XCTestCase {
     XCTAssertEqual(receivedError as? NSError, error)
   }
   
-  private func uniqueItems() -> FeedItem {
+  private func uniqueItem() -> FeedItem {
     return FeedItem(id: UUID(), description: "any", location: "any", imageURL: anyURL())
   }
   
+  private func uniqueItems() -> (model: [FeedItem], local: [LocalFeedItem]) {
+    let items = [uniqueItem(), uniqueItem()]
+    let localItems = items.map { LocalFeedItem(id: $0.id,
+                                               description: $0.description,
+                                               location: $0.location,
+                                               imageURL: $0.imageURL)}
+    return (items, localItems)
+  }
   private func anyNSError() -> NSError {
     return NSError(domain: "any error", code: 0)
   }
