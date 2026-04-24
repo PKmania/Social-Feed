@@ -18,7 +18,7 @@ class CacheFeedUseCaseTests: XCTestCase {
   func test_save_requestsCacheDeletion() {
     let (sut, store) = makeSUT()
     
-    sut.save(uniqueItems().model) {_ in }
+    sut.save(uniqueImageFeed().model) {_ in }
     
     XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
   }
@@ -27,7 +27,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     let (sut, store) = makeSUT()
     let error = anyNSError()
     
-    sut.save(uniqueItems().model) {_ in }
+    sut.save(uniqueImageFeed().model) {_ in }
     store.completeDeletion(with: error)
     
     XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
@@ -36,7 +36,7 @@ class CacheFeedUseCaseTests: XCTestCase {
   func test_save_requestNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
     let timestamp = Date()
     let (sut, store) = makeSUT(currentDate: { timestamp })
-    let (model, localItem) = uniqueItems()
+    let (model, localItem) = uniqueImageFeed()
     sut.save(model) {_ in }
     store.completeDeletionSuccessfully()
     
@@ -77,7 +77,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
     
     var receivedResult = [LocalFeedLoader.SaveResult]()
-    sut?.save(uniqueItems().model) { error in
+    sut?.save(uniqueImageFeed().model) { error in
       receivedResult.append(error)
     }
     sut = nil
@@ -90,7 +90,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
     
     var receivedResult = [LocalFeedLoader.SaveResult]()
-    sut?.save(uniqueItems().model) { error in
+    sut?.save(uniqueImageFeed().model) { error in
       receivedResult.append(error)
     }
     store.completeDeletionSuccessfully()
@@ -113,7 +113,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     enum ReceivedMessage : Equatable {
       case  deleteCachedFeed
-      case insert([LocalFeedItem], Date)
+      case insert([LocalFeedImage], Date)
     }
     
     var receivedMessages : [ReceivedMessage] = []
@@ -142,9 +142,9 @@ class CacheFeedUseCaseTests: XCTestCase {
       insertionCompletions[index](nil)
     }
     
-    func insert(_ items: [LocalFeedItem], timestamp: Date, completion: @escaping InsertionCompletion) {
+    func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
       insertionCompletions.append(completion)
-      receivedMessages.append(.insert(items, timestamp))
+      receivedMessages.append(.insert(feed, timestamp))
     }
   }
   
@@ -152,7 +152,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     let exp = expectation(description: "eait for completeion")
     
     var receivedError: Error?
-    sut.save(uniqueItems().model) { error in
+    sut.save(uniqueImageFeed().model) { error in
       receivedError = error
       exp.fulfill()
     }
@@ -163,17 +163,17 @@ class CacheFeedUseCaseTests: XCTestCase {
     XCTAssertEqual(receivedError as? NSError, error)
   }
   
-  private func uniqueItem() -> FeedItem {
-    return FeedItem(id: UUID(), description: "any", location: "any", imageURL: anyURL())
+  private func uniqueImage() -> FeedImage {
+    return FeedImage(id: UUID(), description: "any", location: "any", url: anyURL())
   }
   
-  private func uniqueItems() -> (model: [FeedItem], local: [LocalFeedItem]) {
-    let items = [uniqueItem(), uniqueItem()]
-    let localItems = items.map { LocalFeedItem(id: $0.id,
+  private func uniqueImageFeed() -> (model: [FeedImage], local: [LocalFeedImage]) {
+    let feed = [uniqueImage(), uniqueImage()]
+    let localItems = feed.map { LocalFeedImage(id: $0.id,
                                                description: $0.description,
                                                location: $0.location,
-                                               imageURL: $0.imageURL)}
-    return (items, localItems)
+                                               url: $0.url)}
+    return (feed, localItems)
   }
   private func anyNSError() -> NSError {
     return NSError(domain: "any error", code: 0)
