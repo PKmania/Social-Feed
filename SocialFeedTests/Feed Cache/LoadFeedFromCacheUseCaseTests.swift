@@ -17,10 +17,30 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
   func test_load_requestCacheRetrival() {
     let (sut, store) = makeSUT()
     
-    sut.load()
+    sut.load {_ in }
     
     XCTAssertEqual(store.receivedMessages, [.retrieve])
   }
+  
+  func test_load_failsOnRetivalError() {
+    let (sut, store) = makeSUT()
+    let exp = expectation(description: "wait for completion")
+    let retrivalError = anyNSError()
+    var receivedError: Error?
+    sut.load { error in
+    receivedError = error
+      exp.fulfill()
+    }
+    store.completeRetrival(with: retrivalError)
+    
+    wait(for: [exp], timeout: 1.0)
+    
+    XCTAssertEqual(receivedError as? NSError, retrivalError)
+  }
+  
+  
+  
+  
   //MARK: helpers
   
   private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStoreSpy) {
@@ -31,6 +51,15 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
     return (sut, store)
   }
 
+  
+  private func anyNSError() -> NSError {
+    return NSError(domain: "any error", code: 0)
+  }
+  
+  private func anyURL() -> URL {
+    return URL(string: "http://any-url.com")!
+  }
+  
 }
 
 
