@@ -4,7 +4,7 @@
 
 import Foundation
 
-private final class FeedCachePoilcy {
+private final class FeedCachePolicy {
   private static let calender = Calendar(identifier: .gregorian)
 
   private static var maxCacheAgeInDays: Int {
@@ -59,7 +59,7 @@ extension LocalFeedLoader: FeedLoader {
       switch result {
       case let .failure(error):
         completion(.failure(error))
-      case let .found(feed, timestamp) where FeedCachePoilcy.validate(timestamp, against: currentDate()):
+      case let .found(feed, timestamp) where FeedCachePolicy.validate(timestamp, against: currentDate()):
         completion(.success(feed.toModels()))
       case .empty, .found:
         completion(.success([]))    // also use --- fallthrough
@@ -75,7 +75,7 @@ extension LocalFeedLoader {
       switch result {
       case .failure:
         store.deleteCachedFeed {_ in }
-      case let .found(_, timestamp) where !FeedCachePoilcy.validate(timestamp, against: currentDate()):
+      case let .found(_, timestamp) where !FeedCachePolicy.validate(timestamp, against: currentDate()):
         store.deleteCachedFeed {_ in }
       case .empty, .found: break
       }
