@@ -40,7 +40,8 @@
 		5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Feed API/Helpers/XCTestCase+MemoryLeakTracking.swift",
+				Helpers/SharedTestHelpers.swift,
+				"Helpers/XCTestCase+MemoryLeakTracking.swift",
 			);
 			target = 5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */;
 		};
