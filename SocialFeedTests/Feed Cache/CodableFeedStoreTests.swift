@@ -125,16 +125,16 @@ class CodableFeedStoreTests: XCTestCase {
   // MARK: Helpers
   
   private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableFeedStore {
-    let sut = CodableFeedStore(storeURL: storeURL())
+    let sut = CodableFeedStore(storeURL: testSpecificStoreURL())
     trackMemoryLeaks(sut, file: file, line: line)
     return sut
   }
   
-  func removeArtifactsFromDirectory() {
-    try? FileManager.default.removeItem(at: storeURL())
+  private func removeArtifactsFromDirectory() {
+    try? FileManager.default.removeItem(at: testSpecificStoreURL())
   }
   
-  private func storeURL() -> URL {
-    FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("image-feed.store")
+  private func testSpecificStoreURL() -> URL {
+    FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
   }
 }
