@@ -39,3 +39,8 @@ protocol FailableDeleteFeedStoreSpecs: FeedStoreSpecs {
 }
 
 typealias FailableFeedStoreSpecs = FailableRetrieveFeedStoreSpecs & FailableInsertFeedStoreSpecs & FailableDeleteFeedStoreSpecs
+
+
+protocol CheckCI {
+  func checking()
+}
