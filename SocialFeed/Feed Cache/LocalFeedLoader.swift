@@ -14,8 +14,6 @@ public final class LocalFeedLoader {
     self.store = store
     self.currentDate = currentDate
   }
-  
-
 }
 
 extension LocalFeedLoader {
@@ -72,8 +70,6 @@ extension LocalFeedLoader {
     }
   }
 }
-
-
 
 private extension Array where Element == FeedImage {
   func toLocal() -> [LocalFeedImage] {
