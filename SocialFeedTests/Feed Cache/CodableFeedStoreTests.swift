@@ -4,41 +4,9 @@
 
 import XCTest
 import SocialFeed
-protocol FeedStoreSpecs {
-  
-   func test_retrieve_deliverEmptyOnEmptyCache()
-   func test_retrieve_hasNoSideEffectsOnEmptyCache()
-   func test_retrieve_deliversFoundValuesOnNonEmptyCache()
-   func test_retrieve_hasNoSideEffectsOnNonEmptyCache()
 
-  func test_insert_deliverNoErrorOnEmptyCache()
-  func test_insert_deliverNoErrorOnNonEmptyCache()
-   func test_insert_overridesPreviouslyInsertedCacheValues()
-   
-  func test_delete_deliverNoErrorOnEmptyCache()
-  func test_delete_deliverNoErrorOnNonEmptyCache()
-   func test_delete_hasNoSideEffectsOnEmptyCache()
-   func test_delete_emptiesPreviouslyInsertedCache()
 
-   func test_storeSideEffects_runSerially()
-}
-
-protocol FailiableRetrieveFeedStoreSpecs {
-  func test_retrieve_deliversFailureOnRetrievalError()
-  func test_retrieve_hasNoSideEffectsOnFailure()
-}
-
-protocol FailiableInsertFeedStoreSpecs {
-  func test_insert_deliversErrorOnInsertionError()
-  func test_insert_hasNoSideEffectsOnInsertionError()
-}
-
-protocol FailiableDeleteFeedStoreSpecs {
-  func test_delete_deliversErrorOnDeletionError()
-  func test_delete_hasNoSideEffectsOnDeletionError()
-}
-
-class CodableFeedStoreTests: XCTestCase {
+class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
   
   override func setUp() {
     super.setUp()
