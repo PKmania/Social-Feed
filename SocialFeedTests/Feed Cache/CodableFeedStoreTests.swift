@@ -19,7 +19,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
   }
   
   // MARK: Retrieve Cache
-  func test_retrieve_deliverEmptyOnEmptyCache() {
+  func test_retrieve_deliversEmptyOnEmptyCache() {
     let sut = makeSUT()
     
     assertThatRetrieveDeliversEmptyOnEmptyCache(on: sut)
