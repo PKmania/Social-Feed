@@ -29,22 +29,30 @@ public final class CoreDataFeedStore: FeedStore {
   
   public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
     let context = self.context
-      context.perform {
-        do {
-          let managedCache = try ManagedCache.newUniqueInstance(in: context)
-          managedCache.timestamp = timestamp
-          managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
-
-          try context.save()
-          completion(nil)
-        } catch {
-          completion(error)
-        }
+    context.perform {
+      do {
+        let managedCache = try ManagedCache.newUniqueInstance(in: context)
+        managedCache.timestamp = timestamp
+        managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
+        
+        try context.save()
+        completion(nil)
+      } catch {
+        completion(error)
       }
+    }
   }
   
   public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
-    completion(nil)
+    let context = self.context
+    context.perform {
+      do {
+        try ManagedCache.find(in: context).map(context.delete).map(context.save)
+        completion(nil)
+      } catch {
+        completion(error)
+      }
+    }
   }
   
 }
@@ -55,7 +63,7 @@ private extension NSPersistentContainer {
     case modelNotFound
     case failedToLoadPersistentStores(Swift.Error)
   }
-
+  
   static func load(modelName name: String, url: URL, in bundle: Bundle) throws -> NSPersistentContainer {
     guard let model = NSManagedObjectModel.with(name: name, in: bundle) else {
       throw LoadingError.modelNotFound
@@ -86,14 +94,14 @@ private class ManagedCache: NSManagedObject {
   @NSManaged var feed: NSOrderedSet
   
   var localFeed: [LocalFeedImage] {
-      return feed.compactMap { ($0 as? ManagedFeedImage)?.local }
-    }
+    return feed.compactMap { ($0 as? ManagedFeedImage)?.local }
+  }
   
   static func find(in context: NSManagedObjectContext) throws -> ManagedCache? {
-      let request = NSFetchRequest<ManagedCache>(entityName: entity().name!)
-      request.returnsObjectsAsFaults = false
-      return try context.fetch(request).first
-    }
+    let request = NSFetchRequest<ManagedCache>(entityName: entity().name!)
+    request.returnsObjectsAsFaults = false
+    return try context.fetch(request).first
+  }
   
   static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
     try find(in: context).map(context.delete)
