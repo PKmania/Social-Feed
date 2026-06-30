@@ -37,13 +37,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		5D12958D2FF130D100BC00E2 /* Exceptions for "SocialFeed" folder in "SocialFeed" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Feed Cache/FeedStore.xcdatamodeld",
-			);
-			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
-		};
 		5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -62,9 +55,6 @@
 		};
 		5DF8C41C2F91FACF00388F6B /* SocialFeed */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				5D12958D2FF130D100BC00E2 /* Exceptions for "SocialFeed" folder in "SocialFeed" target */,
-			);
 			path = SocialFeed;
 			sourceTree = "<group>";
 		};
