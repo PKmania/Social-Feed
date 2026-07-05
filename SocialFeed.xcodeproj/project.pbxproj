@@ -50,6 +50,8 @@
 		5D4A0AFD2FFA2FFE00D2376B /* Exceptions for "SocialFeedTests" folder in "SocialFeedCacheIntegrationTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Feed Cache/Helpers/FeedCacheTestHelpers.swift",
+				Helpers/SharedTestHelpers.swift,
 				"Helpers/XCTestCase+MemoryLeakTracking.swift",
 			);
 			target = 5D4A0A482FFA26E700D2376B /* SocialFeedCacheIntegrationTests */;
