@@ -7,6 +7,16 @@ import SocialFeed
 
 final class SocialFeedCacheIntegrationTests: XCTestCase {
 
+  override func setUp() {
+    super.setUp()
+    setupEmptyStoreState()
+  }
+  
+  override func tearDown() {
+    super.tearDown()
+    undoStoreSideEffets()
+  }
+  
   func test_load_deliversNoItemsOnEmptyCache() {
     let sut = makeSUT()
 
@@ -47,5 +57,16 @@ final class SocialFeedCacheIntegrationTests: XCTestCase {
   private func cachesDirectory() -> URL {
     return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
   }
-
+  
+  private func setupEmptyStoreState() {
+    deleteStoreArtifacts()
+  }
+  
+  private func undoStoreSideEffets() {
+    deleteStoreArtifacts()
+  }
+  
+  private func deleteStoreArtifacts() {
+    try? FileManager.default.removeItem(at: testSpecificStoreURL())
+  }
 }
