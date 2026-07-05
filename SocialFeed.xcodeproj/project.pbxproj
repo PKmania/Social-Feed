@@ -47,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5D4A0AFD2FFA2FFE00D2376B /* Exceptions for "SocialFeedTests" folder in "SocialFeedCacheIntegrationTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Helpers/XCTestCase+MemoryLeakTracking.swift",
+			);
+			target = 5D4A0A482FFA26E700D2376B /* SocialFeedCacheIntegrationTests */;
+		};
 		5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -77,6 +84,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */,
+				5D4A0AFD2FFA2FFE00D2376B /* Exceptions for "SocialFeedTests" folder in "SocialFeedCacheIntegrationTests" target */,
 			);
 			path = SocialFeedTests;
 			sourceTree = "<group>";
