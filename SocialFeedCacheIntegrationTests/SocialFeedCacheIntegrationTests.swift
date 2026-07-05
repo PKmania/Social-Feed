@@ -57,6 +57,7 @@ final class SocialFeedCacheIntegrationTests: XCTestCase {
     trackMemoryLeaks(sut, file: file, line: line)
     return sut
   }
+  
   private func expect(_ sut: LocalFeedLoader, toLoad expectedFeed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
     let exp = expectation(description: "Wait for load completion")
     sut.load { result in
