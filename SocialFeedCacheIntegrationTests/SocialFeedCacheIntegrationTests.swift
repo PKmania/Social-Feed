@@ -6,7 +6,7 @@ import XCTest
 import SocialFeed
 
 final class SocialFeedCacheIntegrationTests: XCTestCase {
-
+  
   override func setUp() {
     super.setUp()
     setupEmptyStoreState()
@@ -28,14 +28,9 @@ final class SocialFeedCacheIntegrationTests: XCTestCase {
     let sutToPerformLoad = makeSUT()
     let feed = uniqueImageFeed().model
     
-    let saveExp = expectation(description: "Wait for save completion")
-    sutToPerformSave.save(feed) { saveError in
-      XCTAssertNil(saveError, "Expected to save feed successfully")
-      saveExp.fulfill()
-    }
-    wait(for: [saveExp], timeout: 1.0)
+    save(feed, with: sutToPerformSave)
     
-   expect(sutToPerformLoad, toLoad: feed)
+    expect(sutToPerformLoad, toLoad: feed)
   }
   
   func test_save_overridesItemsSavedOnASeparateInstance() {
@@ -45,25 +40,14 @@ final class SocialFeedCacheIntegrationTests: XCTestCase {
     let firstFeed = uniqueImageFeed().model
     let latestFeed = uniqueImageFeed().model
     
-    let saveExp1 = expectation(description: "Wait for save completion")
-    sutToPerformFirstSave.save(firstFeed) { saveError in
-      XCTAssertNil(saveError, "Expected to save feed successfully")
-      saveExp1.fulfill()
-    }
-    wait(for: [saveExp1], timeout: 1.0)
-    
-    let saveExp2 = expectation(description: "Wait for save completion")
-    sutToPerformLastSave.save(latestFeed) { saveError in
-      XCTAssertNil(saveError, "Expected to save feed successfully")
-      saveExp2.fulfill()
-    }
-    wait(for: [saveExp2], timeout: 1.0)
+    save(firstFeed, with: sutToPerformFirstSave)
+    save(latestFeed, with: sutToPerformLastSave)
     
     expect(sutToPerformLoad, toLoad: latestFeed)
   }
   
   // MARK: Helpers
-
+  
   private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
     let storeBundle = Bundle(for: CoreDataFeedStore.self)
     let storeURL = testSpecificStoreURL()
@@ -84,14 +68,24 @@ final class SocialFeedCacheIntegrationTests: XCTestCase {
         XCTFail("Expected successful feed result , got \(error) instead", file: file, line: line)
         
       default:
-          XCTFail("Received an unknown result.")
+        XCTFail("Received an unknown result.")
       }
       
       exp.fulfill()
     }
     wait(for: [exp], timeout: 1.0)
-
+    
   }
+  
+  private func save(_ feed: [FeedImage], with loader: LocalFeedLoader, file: StaticString = #file, line: UInt = #line) {
+    let saveExp = expectation(description: "Wait for save completion")
+    loader.save(feed) { saveError in
+      XCTAssertNil(saveError, "Expected to save feed successfully", file: file, line: line)
+      saveExp.fulfill()
+    }
+    wait(for: [saveExp], timeout: 1.0)
+  }
+  
   private func testSpecificStoreURL() -> URL {
     return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
   }
