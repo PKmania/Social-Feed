@@ -58,7 +58,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
   func test_load_deliversErrorOnNon200HTTPResponseWithInvalidJSONData() {
     let (sut, client) = makeSUT()
     expect(sut, toCompleteWith: failure(.invalidData)) {
-      let invalidJSON = Data()
+      let invalidJSON = Data("InvalidJson".utf8)
       client.complete(with: 200, data: invalidJSON)
     }
   }
@@ -119,11 +119,8 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
       "image": imageURL.absoluteString,
       "description": description,
       "location": location
-    ].reduce(into: [String: Any]()) { (acc, e) in
-      if let value = e.value {
-        acc[e.key] = value
-      }
-    }
+    ].compactMapValues { $0 }
+    
     return (feedItem, json)
   }
   
