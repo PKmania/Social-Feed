@@ -39,7 +39,7 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader: FeedLoader {
-  public typealias LoadFeed = LoadFeedResult
+  public typealias LoadFeed = FeedLoader.Result
   
   public func load(completion: @escaping (LoadFeed) -> Void) {
     store.retrieve { [weak self]( result) in
