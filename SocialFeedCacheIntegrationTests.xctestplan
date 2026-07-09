@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "61A5B883-0D52-4151-9FA2-F44DF2198625",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5DF8C4192F91FACF00388F6B",
+          "name" : "SocialFeed"
+        }
+      ]
+    },
+    "performanceAntipatternCheckerEnabled" : true,
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5D4A0A482FFA26E700D2376B",
+        "name" : "SocialFeedCacheIntegrationTests"
+      }
+    }
+  ],
+  "version" : 1
+}

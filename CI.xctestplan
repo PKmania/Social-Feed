@@ -9,7 +9,7 @@
     }
   ],
   "defaultOptions" : {
-
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {
@@ -26,6 +26,13 @@
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5DF8C4222F91FACF00388F6B",
         "name" : "SocialFeedTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5D4A0A482FFA26E700D2376B",
+        "name" : "SocialFeedCacheIntegrationTests"
       }
     }
   ],
