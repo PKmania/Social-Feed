@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "57082D13-B2E5-4BC3-B26B-D598F3F10093",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5D619BC03000AE7800F34E27",
+          "name" : "SocialFeedIOS"
+        }
+      ]
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialFeed.xcodeproj",
+        "identifier" : "5D619BC83000AE7900F34E27",
+        "name" : "SocialFeedIOSTests"
+      }
+    }
+  ],
+  "version" : 1
+}
