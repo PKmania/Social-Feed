@@ -52,6 +52,7 @@
 		5D619BC93000AE7900F34E27 /* SocialFeedIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D619BD63000AF3C00F34E27 /* SocialFeedIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeedIOSTests.xctestplan; sourceTree = "<group>"; };
 		5D619BD73000B30000F34E27 /* CI_macOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_macOS.xctestplan; sourceTree = "<group>"; };
+		5D619BD83000B42700F34E27 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_iOS.xctestplan; sourceTree = "<group>"; };
 		5DD528882F977F79006F07D8 /* SocialFeed.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeed.xctestplan; sourceTree = "<group>"; };
 		5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +169,7 @@
 		5DF8C4102F91FACF00388F6B = {
 			isa = PBXGroup;
 			children = (
+				5D619BD83000B42700F34E27 /* CI_iOS.xctestplan */,
 				5D619BD63000AF3C00F34E27 /* SocialFeedIOSTests.xctestplan */,
 				5D619BBB3000AAAD00F34E27 /* SocialFeedAPIEndToEndTests.xctestplan */,
 				5D4A0A532FFA273700D2376B /* SocialFeedCacheIntegrationTests.xctestplan */,
