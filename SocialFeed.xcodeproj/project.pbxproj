@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D4A0A4D2FFA26E700D2376B /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
+		5D619BCA3000AE7900F34E27 /* SocialFeedIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D619BC13000AE7800F34E27 /* SocialFeedIOS.framework */; };
 		5DD528912F979B82006F07D8 /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 		5DF8C4242F91FACF00388F6B /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 /* End PBXBuildFile section */
@@ -19,6 +20,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5DF8C4192F91FACF00388F6B;
 			remoteInfo = SocialFeed;
+		};
+		5D619BCB3000AE7900F34E27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DF8C4112F91FACF00388F6B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D619BC03000AE7800F34E27;
+			remoteInfo = SocialFeedIOS;
 		};
 		5DD528922F979B82006F07D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -40,6 +48,9 @@
 		5D4A0A492FFA26E700D2376B /* SocialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D4A0A532FFA273700D2376B /* SocialFeedCacheIntegrationTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeedCacheIntegrationTests.xctestplan; sourceTree = "<group>"; };
 		5D619BBB3000AAAD00F34E27 /* SocialFeedAPIEndToEndTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeedAPIEndToEndTests.xctestplan; sourceTree = "<group>"; };
+		5D619BC13000AE7800F34E27 /* SocialFeedIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocialFeedIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D619BC93000AE7900F34E27 /* SocialFeedIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D619BD63000AF3C00F34E27 /* SocialFeedIOSTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeedIOSTests.xctestplan; sourceTree = "<group>"; };
 		5DD528882F977F79006F07D8 /* SocialFeed.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialFeed.xctestplan; sourceTree = "<group>"; };
 		5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +84,16 @@
 			path = SocialFeedCacheIntegrationTests;
 			sourceTree = "<group>";
 		};
+		5D619BC23000AE7800F34E27 /* SocialFeedIOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SocialFeedIOS;
+			sourceTree = "<group>";
+		};
+		5D619BCD3000AE7900F34E27 /* SocialFeedIOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SocialFeedIOSTests;
+			sourceTree = "<group>";
+		};
 		5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SocialFeedAPIEndToEndTests;
@@ -100,6 +121,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D4A0A4D2FFA26E700D2376B /* SocialFeed.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D619BBE3000AE7800F34E27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D619BC63000AE7900F34E27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D619BCA3000AE7900F34E27 /* SocialFeedIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +168,7 @@
 		5DF8C4102F91FACF00388F6B = {
 			isa = PBXGroup;
 			children = (
+				5D619BD63000AF3C00F34E27 /* SocialFeedIOSTests.xctestplan */,
 				5D619BBB3000AAAD00F34E27 /* SocialFeedAPIEndToEndTests.xctestplan */,
 				5D4A0A532FFA273700D2376B /* SocialFeedCacheIntegrationTests.xctestplan */,
 				5DD528882F977F79006F07D8 /* SocialFeed.xctestplan */,
@@ -140,6 +177,8 @@
 				5DF8C4272F91FACF00388F6B /* SocialFeedTests */,
 				5DD5288E2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */,
 				5D4A0A4A2FFA26E700D2376B /* SocialFeedCacheIntegrationTests */,
+				5D619BC23000AE7800F34E27 /* SocialFeedIOS */,
+				5D619BCD3000AE7900F34E27 /* SocialFeedIOSTests */,
 				5DF8C41B2F91FACF00388F6B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -151,6 +190,8 @@
 				5DF8C4232F91FACF00388F6B /* SocialFeedTests.xctest */,
 				5DD5288D2F979B82006F07D8 /* SocialFeedAPIEndToEndTests.xctest */,
 				5D4A0A492FFA26E700D2376B /* SocialFeedCacheIntegrationTests.xctest */,
+				5D619BC13000AE7800F34E27 /* SocialFeedIOS.framework */,
+				5D619BC93000AE7900F34E27 /* SocialFeedIOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +199,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		5D619BBC3000AE7800F34E27 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DF8C4152F91FACF00388F6B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,6 +237,52 @@
 			);
 			productName = SocialFeedCacheIntegrationTests;
 			productReference = 5D4A0A492FFA26E700D2376B /* SocialFeedCacheIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5D619BC03000AE7800F34E27 /* SocialFeedIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D619BD03000AE7900F34E27 /* Build configuration list for PBXNativeTarget "SocialFeedIOS" */;
+			buildPhases = (
+				5D619BBC3000AE7800F34E27 /* Headers */,
+				5D619BBD3000AE7800F34E27 /* Sources */,
+				5D619BBE3000AE7800F34E27 /* Frameworks */,
+				5D619BBF3000AE7800F34E27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5D619BC23000AE7800F34E27 /* SocialFeedIOS */,
+			);
+			name = SocialFeedIOS;
+			packageProductDependencies = (
+			);
+			productName = SocialFeedIOS;
+			productReference = 5D619BC13000AE7800F34E27 /* SocialFeedIOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5D619BC83000AE7900F34E27 /* SocialFeedIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D619BD33000AE7900F34E27 /* Build configuration list for PBXNativeTarget "SocialFeedIOSTests" */;
+			buildPhases = (
+				5D619BC53000AE7900F34E27 /* Sources */,
+				5D619BC63000AE7900F34E27 /* Frameworks */,
+				5D619BC73000AE7900F34E27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D619BCC3000AE7900F34E27 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				5D619BCD3000AE7900F34E27 /* SocialFeedIOSTests */,
+			);
+			name = SocialFeedIOSTests;
+			packageProductDependencies = (
+			);
+			productName = SocialFeedIOSTests;
+			productReference = 5D619BC93000AE7900F34E27 /* SocialFeedIOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */ = {
@@ -273,6 +367,12 @@
 					5D4A0A482FFA26E700D2376B = {
 						CreatedOnToolsVersion = 26.5;
 					};
+					5D619BC03000AE7800F34E27 = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					5D619BC83000AE7900F34E27 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					5DD5288C2F979B82006F07D8 = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -303,12 +403,28 @@
 				5DF8C4222F91FACF00388F6B /* SocialFeedTests */,
 				5DD5288C2F979B82006F07D8 /* SocialFeedAPIEndToEndTests */,
 				5D4A0A482FFA26E700D2376B /* SocialFeedCacheIntegrationTests */,
+				5D619BC03000AE7800F34E27 /* SocialFeedIOS */,
+				5D619BC83000AE7900F34E27 /* SocialFeedIOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5D4A0A472FFA26E700D2376B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D619BBF3000AE7800F34E27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D619BC73000AE7900F34E27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -346,6 +462,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5D619BBD3000AE7800F34E27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5D619BC53000AE7900F34E27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DD528892F979B82006F07D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -374,6 +504,11 @@
 			isa = PBXTargetDependency;
 			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
 			targetProxy = 5D4A0A4E2FFA26E700D2376B /* PBXContainerItemProxy */;
+		};
+		5D619BCC3000AE7900F34E27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D619BC03000AE7800F34E27 /* SocialFeedIOS */;
+			targetProxy = 5D619BCB3000AE7900F34E27 /* PBXContainerItemProxy */;
 		};
 		5DD528932F979B82006F07D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -423,6 +558,122 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5D619BD13000AE7900F34E27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedIOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5D619BD23000AE7900F34E27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedIOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5D619BD43000AE7900F34E27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5D619BD53000AE7900F34E27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.improtantdevelopers.SocialFeedIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -699,6 +950,24 @@
 			buildConfigurations = (
 				5D4A0A502FFA26E700D2376B /* Debug */,
 				5D4A0A512FFA26E700D2376B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D619BD03000AE7900F34E27 /* Build configuration list for PBXNativeTarget "SocialFeedIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D619BD13000AE7900F34E27 /* Debug */,
+				5D619BD23000AE7900F34E27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5D619BD33000AE7900F34E27 /* Build configuration list for PBXNativeTarget "SocialFeedIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D619BD43000AE7900F34E27 /* Debug */,
+				5D619BD53000AE7900F34E27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
