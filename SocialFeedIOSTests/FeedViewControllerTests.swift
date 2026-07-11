@@ -5,38 +5,7 @@
 import XCTest
 import UIKit
 import SocialFeed
-class FeedViewController: UITableViewController {
-  private var loader: FeedLoader?
-  private var viewAppeared = false
-  convenience init(loader: FeedLoader) {
-    self.init()
-    self.loader = loader
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    refreshControl = UIRefreshControl()
-    refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-
-    load()
-  }
-
-  override func viewIsAppearing(_ animated: Bool) {
-    super.viewIsAppearing(animated)
-    if !viewAppeared {
-      refreshControl?.beginRefreshing()
-      viewAppeared = true
-    }
-   
-
-  }
-  @objc private func load() {
-    refreshControl?.beginRefreshing()
-    loader?.load { [weak self] _ in
-      self?.refreshControl?.endRefreshing()
-    }
-  }
-}
+import SocialFeedIOS
 
 final class FeedViewControllerTests: XCTestCase {
   
@@ -70,7 +39,7 @@ final class FeedViewControllerTests: XCTestCase {
     loader.completeFeedLoading(at: 1)
     XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading is completed")
   }
-
+  
   //MARK: - Helpers
   
   private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
