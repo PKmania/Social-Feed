@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		5D4A0A4D2FFA26E700D2376B /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 		5D619BCA3000AE7900F34E27 /* SocialFeedIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D619BC13000AE7800F34E27 /* SocialFeedIOS.framework */; };
-		5D619CA8300171E300F34E27 /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; platformFilter = ios; };
-		5D619CA9300171E300F34E27 /* SocialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5D7EA0A1300E8732008E600E /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; platformFilter = ios; };
 		5DD528912F979B82006F07D8 /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 		5DF8C4242F91FACF00388F6B /* SocialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF8C41A2F91FACF00388F6B /* SocialFeed.framework */; };
 /* End PBXBuildFile section */
@@ -30,7 +29,7 @@
 			remoteGlobalIDString = 5D619BC03000AE7800F34E27;
 			remoteInfo = SocialFeedIOS;
 		};
-		5D619CAA300171E300F34E27 /* PBXContainerItemProxy */ = {
+		5D7EA0A3300E8732008E600E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DF8C4112F91FACF00388F6B /* Project object */;
 			proxyType = 1;
@@ -52,20 +51,6 @@
 			remoteInfo = SocialFeed;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		5D619CAC300171E300F34E27 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5D619CA9300171E300F34E27 /* SocialFeed.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5D4A0A492FFA26E700D2376B /* SocialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D619CA8300171E300F34E27 /* SocialFeed.framework in Frameworks */,
+				5D7EA0A1300E8732008E600E /* SocialFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,12 +274,11 @@
 				5D619BBD3000AE7800F34E27 /* Sources */,
 				5D619BBE3000AE7800F34E27 /* Frameworks */,
 				5D619BBF3000AE7800F34E27 /* Resources */,
-				5D619CAC300171E300F34E27 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5D619CAB300171E300F34E27 /* PBXTargetDependency */,
+				5D7EA0A4300E8732008E600E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				5D619BC23000AE7800F34E27 /* SocialFeedIOS */,
@@ -556,11 +540,11 @@
 			target = 5D619BC03000AE7800F34E27 /* SocialFeedIOS */;
 			targetProxy = 5D619BCB3000AE7900F34E27 /* PBXContainerItemProxy */;
 		};
-		5D619CAB300171E300F34E27 /* PBXTargetDependency */ = {
+		5D7EA0A4300E8732008E600E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
 			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
-			targetProxy = 5D619CAA300171E300F34E27 /* PBXContainerItemProxy */;
+			targetProxy = 5D7EA0A3300E8732008E600E /* PBXContainerItemProxy */;
 		};
 		5DD528932F979B82006F07D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
