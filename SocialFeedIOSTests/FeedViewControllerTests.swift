@@ -332,6 +332,7 @@ final class FeedViewControllerTests: XCTestCase {
 
 private extension FeedViewController {
   func simulateUserInitiatedFeedReload() {
+    
     refreshControl?.simulatePullToRefresh()
   }
   
@@ -430,7 +431,7 @@ private extension UIButton {
   }
 }
 
-private extension UITableViewController {
+private extension FeedViewController {
   func simulateAppearance() {
     if !isViewLoaded {
       loadViewIfNeeded()
@@ -447,7 +448,7 @@ private extension UITableViewController {
       }
     }
     refreshControl = fake
-    
+    refreshController?.refreshControl = fake
   }
 }
 private class FakeUIRefreshControl: UIRefreshControl {
