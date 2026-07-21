@@ -9,6 +9,7 @@ import SocialFeed
 final public class FeedViewController: UITableViewController {
   private var loader: FeedLoader?
   private var viewAppeared = false
+  private var tableModel = [FeedImage]()
   
   public convenience init(loader: FeedLoader) {
     self.init()
@@ -33,8 +34,25 @@ final public class FeedViewController: UITableViewController {
   
   @objc private func load() {
     refreshControl?.beginRefreshing()
-    loader?.load { [weak self] _ in
+    loader?.load { [weak self] result in
+      self?.tableModel = (try? result.get()) ?? []
+      self?.tableView.reloadData()
       self?.refreshControl?.endRefreshing()
     }
+  }
+}
+
+extension FeedViewController {
+  public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return tableModel.count
+  }
+  
+  public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let model = tableModel[indexPath.item]
+    let cell = FeedImageCell()
+    cell.locationContainer.isHidden = (model.location == nil)
+    cell.descriptionLabel.text = model.description
+    cell.locationLabel.text = model.location
+    return cell
   }
 }
