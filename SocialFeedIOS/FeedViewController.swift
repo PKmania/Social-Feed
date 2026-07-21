@@ -4,6 +4,7 @@
 
 import UIKit
 import SocialFeed
+
 public protocol FeedImageDataLoaderTask {
   func cancel()
 }
