@@ -6,6 +6,7 @@ import UIKit
 import SocialFeed
 public protocol FeedImageDataLoader {
   func loadImageData(from url: URL)
+  func cancelImageDataLoad(from url: URL)
 }
 
 final public class FeedViewController: UITableViewController {
@@ -61,5 +62,10 @@ extension FeedViewController {
     cell.locationLabel.text = model.location
     imageLoader?.loadImageData(from: model.url)
     return cell
+  }
+  
+  public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    let model = tableModel[indexPath.item]
+    imageLoader?.cancelImageDataLoad(from: model.url)
   }
 }
