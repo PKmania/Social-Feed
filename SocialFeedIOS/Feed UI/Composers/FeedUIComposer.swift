@@ -4,6 +4,7 @@
 
 import Foundation
 import SocialFeed
+
 public final class FeedUIComposer {
   private init() {}
   public static func feedComposeWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
@@ -13,11 +14,12 @@ public final class FeedUIComposer {
     return feedController
   }
   
+  
   private static func adaptFeedToCellControllers(forwardingTo controller: FeedViewController, loader: FeedImageDataLoader) -> ([FeedImage]) -> Void {
-      return { [weak controller] feed in
-        controller?.tableModel = feed.map { model in
-          FeedImageCellController(model: model, imageLoader: loader)
-        }
+    return { [weak controller] feed in
+      controller?.tableModel = feed.map { model in
+        FeedImageCellController(model: model, imageLoader: loader)
       }
     }
+  }
 }
