@@ -11,6 +11,7 @@ final public class FeedRefreshViewController: NSObject {
   public var view: UIRefreshControl  = UIRefreshControl(){
     didSet {
       setupView()
+      bind()
     }
   }
   private let viewModel: FeedRefreshViewModel
@@ -19,6 +20,7 @@ final public class FeedRefreshViewController: NSObject {
     self.viewModel = viewModel
     super.init()
     setupView()
+    
   }
   private func setupView() {
     view.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -26,16 +28,16 @@ final public class FeedRefreshViewController: NSObject {
   }
   
   @objc func refresh() {
-    bind()
+    
     viewModel.loadFeed()
   }
   
   private func bind() {
-    viewModel.onChange = { [weak self] viewModel in
-      if viewModel.isLoading {
-        self?.view.beginRefreshing()
+    viewModel.onLoadingStateChange = { [weak view] isLoading in
+      if isLoading {
+        view?.beginRefreshing()
       }else {
-        self?.view.endRefreshing()
+        view?.endRefreshing()
       }
     }
   }
