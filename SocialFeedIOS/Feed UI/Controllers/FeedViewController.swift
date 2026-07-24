@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import SocialFeed
 
 final public class FeedViewController: UITableViewController {
   public var refreshController: FeedRefreshViewController?
