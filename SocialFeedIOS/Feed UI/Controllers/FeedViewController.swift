@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import SocialFeed
 
 final public class FeedViewController: UITableViewController {
   public var refreshController: FeedRefreshViewController?
@@ -23,7 +22,7 @@ final public class FeedViewController: UITableViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
     tableView.prefetchDataSource = self
-    refreshControl = refreshController?.refreshControl
+    refreshControl = refreshController?.view
     refreshController?.refresh()
   
   }

@@ -4,34 +4,41 @@
 
 import Foundation
 import UIKit
-import SocialFeed
+
 
 final public class FeedRefreshViewController: NSObject {
-  public var refreshControl: UIRefreshControl = UIRefreshControl() {
+
+  public var view: UIRefreshControl  = UIRefreshControl(){
     didSet {
       setupView()
+      bind()
     }
   }
+  private let viewModel: FeedRefreshViewModel
   
-  private let feedLoader: FeedLoader
-  init(feedLoader: FeedLoader) {
-    self.feedLoader = feedLoader
+  init(viewModel: FeedRefreshViewModel) {
+    self.viewModel = viewModel
     super.init()
     setupView()
+    
   }
   private func setupView() {
-    refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    view.addTarget(self, action: #selector(refresh), for: .valueChanged)
 
   }
-  var onRefresh: (([FeedImage]) -> Void)?
   
   @objc func refresh() {
-    refreshControl.beginRefreshing()
-    feedLoader.load { [weak self] result in
-      if let feed = try? result.get() {
-        self?.onRefresh?(feed)
+    
+    viewModel.loadFeed()
+  }
+  
+  private func bind() {
+    viewModel.onLoadingStateChange = { [weak view] isLoading in
+      if isLoading {
+        view?.beginRefreshing()
+      }else {
+        view?.endRefreshing()
       }
-      self?.refreshControl.endRefreshing()
     }
   }
 }

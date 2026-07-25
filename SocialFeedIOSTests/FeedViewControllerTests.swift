@@ -448,7 +448,7 @@ private extension FeedViewController {
       }
     }
     refreshControl = fake
-    refreshController?.refreshControl = fake
+    refreshController?.view = fake
   }
 }
 private class FakeUIRefreshControl: UIRefreshControl {
