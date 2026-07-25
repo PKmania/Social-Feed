@@ -5,6 +5,8 @@
 import Foundation
 import SocialFeed
 
+
+
 final class FeedRefreshViewModel {
   typealias Observer<T> = (T) -> Void
   private let feedLoader: FeedLoader
