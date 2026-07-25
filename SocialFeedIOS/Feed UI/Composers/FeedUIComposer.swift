@@ -9,12 +9,12 @@ import UIKit
 public final class FeedUIComposer {
   private init() {}
   public static func feedComposeWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
-    let presenter = FeedPresenter()
-    let presenterAdapter = FeedLoaderPresentationAdaptor(feedLoader: feedLoader, presenter: presenter)
+    let presenterAdapter = FeedLoaderPresentationAdaptor(feedLoader: feedLoader)
     let refreshController = FeedRefreshViewController(delegate: presenterAdapter)
     let feedController = FeedViewController(refreshController: refreshController)
-    presenter.feedLoadingView = WeakRefVirtualProxy(refreshController)
-    presenter.feedView = FeedViewAdapter(controller: feedController, imageLoader: imageLoader)
+    let presenter = FeedPresenter(feedView: FeedViewAdapter(controller: feedController, imageLoader: imageLoader),
+                                  feedLoadingView: WeakRefVirtualProxy(refreshController))
+    presenterAdapter.presenter = presenter
     return feedController
   }
 }
@@ -51,19 +51,18 @@ private final class FeedViewAdapter: FeedView {
 
 private final class FeedLoaderPresentationAdaptor: FeedRefreshViewControllerDelegate {
   private let feedLoader: FeedLoader
-  private let presenter: FeedPresenter
-  init(feedLoader: FeedLoader, presenter: FeedPresenter) {
+  var presenter: FeedPresenter?
+  init(feedLoader: FeedLoader) {
     self.feedLoader = feedLoader
-    self.presenter = presenter
   }
   func didRequestFeedRefresh() {
-    presenter.didStartFeedLoading()
+    presenter?.didStartFeedLoading()
     feedLoader.load { [weak self] (result) in
       switch result {
       case let .success(feed):
-        self?.presenter.didFinishLoadingFeed(with: feed)
+        self?.presenter?.didFinishLoadingFeed(with: feed)
       case let .failure(error):
-        self?.presenter.didFinishLoadingFeed(with: error)
+        self?.presenter?.didFinishLoadingFeed(with: error)
       }
     }
   }
