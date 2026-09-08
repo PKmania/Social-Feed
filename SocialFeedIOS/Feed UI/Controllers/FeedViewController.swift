@@ -13,11 +13,11 @@ final public class FeedViewController: UITableViewController {
       tableView.reloadData()
     }
   }
-  
-  public convenience init(refreshController: FeedRefreshViewController) {
-    self.init()
-    self.refreshController = refreshController
-  }
+//  
+//  public convenience init(refreshController: FeedRefreshViewController) {
+//    self.init()
+//    self.refreshController = refreshController
+//  }
   
   public override func viewDidLoad() {
     super.viewDidLoad()
