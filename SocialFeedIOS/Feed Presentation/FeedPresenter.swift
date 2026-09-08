@@ -5,15 +5,10 @@
 import Foundation
 import SocialFeed
 
-struct FeedLoadingViewModel {
-  let isLoading: Bool
-}
 protocol FeedLoadingView {
   func display(_ viewModel: FeedLoadingViewModel)
 }
-struct FeedViewModel {
-  let feed: [FeedImage]
-}
+
 protocol FeedView {
   func display(_ viewModel: FeedViewModel)
 }
@@ -26,16 +21,17 @@ final class FeedPresenter {
     self.feedView = feedView
     self.feedLoadingView = feedLoadingView
   }
+  
   func didStartFeedLoading() {
     feedLoadingView.display(FeedLoadingViewModel(isLoading: true))
-
   }
+  
   func didFinishLoadingFeed(with feed: [FeedImage]) {
     self.feedView.display(FeedViewModel(feed: feed))
     self.feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
   }
+  
   func didFinishLoadingFeed(with error: Error) {
     self.feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
-
   }
 }
