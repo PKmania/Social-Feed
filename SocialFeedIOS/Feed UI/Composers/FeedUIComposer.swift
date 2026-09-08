@@ -106,5 +106,4 @@ private final class FeedImageDataLoaderPresentationAdaptor<View: FeedImageView, 
   func didCancelImageRequest() {
     task?.cancel()
   }
-  
 }
