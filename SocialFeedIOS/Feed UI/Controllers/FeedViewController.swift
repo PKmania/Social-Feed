@@ -4,27 +4,24 @@
 
 import UIKit
 
-final public class FeedViewController: UITableViewController {
-  public var refreshController: FeedRefreshViewController?
+protocol FeedViewControllerDelegate {
+  func didRequestFeedRefresh()
+}
+
+final public class FeedViewController: UITableViewController  {
+
   private var viewAppeared = false
-  
+  var delegate: FeedViewControllerDelegate?
+
   var tableModel = [FeedImageCellController]() {
     didSet {
       tableView.reloadData()
     }
   }
   
-  public convenience init(refreshController: FeedRefreshViewController) {
-    self.init()
-    self.refreshController = refreshController
-  }
-  
   public override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.prefetchDataSource = self
-    refreshControl = refreshController?.view
-    refreshController?.refresh()
-  
+    refresh()
   }
   
   public override func viewIsAppearing(_ animated: Bool) {
@@ -34,15 +31,29 @@ final public class FeedViewController: UITableViewController {
       viewAppeared = true
     }
   }
+  
+
+  @IBAction private func refresh() {
+    delegate?.didRequestFeedRefresh()
+  }
 }
 
+extension FeedViewController: FeedLoadingView {
+  func display(_ viewModel: FeedLoadingViewModel) {
+    if viewModel.isLoading {
+      refreshControl?.beginRefreshing()
+    }else {
+      refreshControl?.endRefreshing()
+    }
+  }
+}
 extension FeedViewController {
   public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tableModel.count
   }
   
   public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return cellController(forRowAt: indexPath).view()
+    return cellController(forRowAt: indexPath).view(in: tableView)
   }
   
   public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

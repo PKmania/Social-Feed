@@ -242,6 +242,48 @@ final class FeedViewControllerTests: XCTestCase {
     XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
   }
   
+  func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
+      let (sut, loader) = makeSUT()
+      sut.loadViewIfNeeded()
+      loader.completeFeedLoading(with: [makeImage()])
+
+      let view = sut.simulateFeedImageViewNotVisible(at: 0)
+      loader.completeImageLoading(with: anyImageData())
+      
+      XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
+  
+  func test_feedImageView_doesNotShowDataFromPreviousRequestWhenCellIsReused() throws {
+    let (sut, loader) = makeSUT()
+    
+    sut.loadViewIfNeeded()
+    loader.completeFeedLoading(with: [makeImage(), makeImage()])
+    
+    let view0 = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
+    view0.prepareForReuse()
+    
+    let imageData0 = UIImage.make(withColor: .red).pngData()!
+    loader.completeImageLoading(with: imageData0, at: 0)
+    
+    XCTAssertEqual(view0.renderedImage, .none, "Expected no image state change for reused view once image loading completes successfully")
+  }
+  
+  func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
+      let (sut, loader) = makeSUT()
+      
+      sut.simulateAppearance()
+      loader.completeFeedLoading(with: [makeImage(), makeImage()])
+      
+      let previousView = try XCTUnwrap(sut.simulateFeedImageViewNotVisible(at: 0))
+
+      let newView = try XCTUnwrap(sut.simulateFeedImageViewVisible(at: 0))
+      previousView.prepareForReuse()
+      
+      let imageData = UIImage.make(withColor: .red).pngData()!
+      loader.completeImageLoading(with: imageData, at: 1)
+      
+      XCTAssertEqual(newView.renderedImage, imageData)
+    }
   //MARK: - Helpers
   
   private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
@@ -280,6 +322,11 @@ final class FeedViewControllerTests: XCTestCase {
   private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
     return FeedImage(id: UUID(), description: description, location: location, url: url)
   }
+  
+  private func anyImageData() -> Data {
+      return UIImage.make(withColor: .red).pngData()!
+    }
+  
   class LoaderSpy: FeedLoader, FeedImageDataLoader {
     
     //MARK: - FeedLoader
@@ -319,7 +366,7 @@ final class FeedViewControllerTests: XCTestCase {
       return TaskSpy { [weak self] in  self?.cancelledImageURLs.append(url)}
     }
     
-    func completeImageLoading(with imageData: Data = Data(), at index: Int) {
+    func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
       imageRequest[index].completion(.success(imageData))
     }
     
@@ -353,12 +400,14 @@ private extension FeedViewController {
     return feedImageView(at: row) as? FeedImageCell
   }
   
-  func simulateFeedImageViewNotVisible(at row: Int) {
+  @discardableResult
+  func simulateFeedImageViewNotVisible(at row: Int) -> FeedImageCell? {
     let view = simulateFeedImageViewVisible(at: row)
     
     let ds = tableView.delegate
     let indexPath = IndexPath(row: row, section: feedImageSection)
     ds?.tableView?(tableView, didEndDisplaying: view!, forRowAt: indexPath)
+    return view
   }
   
   func feedImageView(at row: Int) -> UITableViewCell? {
@@ -448,7 +497,6 @@ private extension FeedViewController {
       }
     }
     refreshControl = fake
-    refreshController?.view = fake
   }
 }
 private class FakeUIRefreshControl: UIRefreshControl {
