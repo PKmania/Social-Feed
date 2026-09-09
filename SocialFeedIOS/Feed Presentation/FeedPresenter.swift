@@ -22,6 +22,14 @@ final class FeedPresenter {
     self.feedLoadingView = feedLoadingView
   }
   
+  static var title: String {
+    return NSLocalizedString(
+      "FEED_VIEW_TITLE",
+      tableName: "Feed",
+      bundle: Bundle(for: FeedPresenter.self),
+      comment: "Title for the feed view")
+  }
+  
   func didStartFeedLoading() {
     feedLoadingView.display(FeedLoadingViewModel(isLoading: true))
   }
