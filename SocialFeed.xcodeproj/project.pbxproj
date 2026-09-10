@@ -77,9 +77,17 @@
 			);
 			target = 5D4A0A482FFA26E700D2376B /* SocialFeedCacheIntegrationTests */;
 		};
+		5D51B8193052E86F00D533C3 /* Exceptions for "SocialFeedTests" folder in "SocialFeedTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Feed Presentation/FeedLocalizationTests.swift",
+			);
+			target = 5DF8C4222F91FACF00388F6B /* SocialFeedTests */;
+		};
 		5D619CAE3001795000F34E27 /* Exceptions for "SocialFeedTests" folder in "SocialFeedIOSTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Feed Presentation/FeedLocalizationTests.swift",
 				"Helpers/XCTestCase+MemoryLeakTracking.swift",
 			);
 			target = 5D619BC83000AE7900F34E27 /* SocialFeedIOSTests */;
@@ -123,6 +131,7 @@
 		5DF8C4272F91FACF00388F6B /* SocialFeedTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				5D51B8193052E86F00D533C3 /* Exceptions for "SocialFeedTests" folder in "SocialFeedTests" target */,
 				5DD528982F97A059006F07D8 /* Exceptions for "SocialFeedTests" folder in "SocialFeedAPIEndToEndTests" target */,
 				5D4A0AFD2FFA2FFE00D2376B /* Exceptions for "SocialFeedTests" folder in "SocialFeedCacheIntegrationTests" target */,
 				5D619CAE3001795000F34E27 /* Exceptions for "SocialFeedTests" folder in "SocialFeedIOSTests" target */,
