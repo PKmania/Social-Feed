@@ -4,7 +4,7 @@
 
 import Foundation
 import UIKit
-
+import SocialFeed
 protocol FeedImageCellControllerDelegate {
   func didRequestImage()
   func didCancelImageRequest()

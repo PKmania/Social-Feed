@@ -4,6 +4,7 @@
 
 import Foundation
 import UIKit
+import SocialFeed
 
 final class WeakRefVirtualProxy<T: AnyObject> {
   private weak var object: T?
