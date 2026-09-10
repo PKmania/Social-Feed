@@ -16,7 +16,7 @@ protocol FeedView {
 final class FeedPresenter {
   var feedView: FeedView
   var feedLoadingView: FeedLoadingView
-
+  
   init(feedView: FeedView, feedLoadingView: FeedLoadingView) {
     self.feedView = feedView
     self.feedLoadingView = feedLoadingView
@@ -31,15 +31,27 @@ final class FeedPresenter {
   }
   
   func didStartFeedLoading() {
+    guard Thread.isMainThread else {
+      return DispatchQueue.main.async { [weak self] in self?.didStartFeedLoading() }
+    }
+    
     feedLoadingView.display(FeedLoadingViewModel(isLoading: true))
   }
   
   func didFinishLoadingFeed(with feed: [FeedImage]) {
+    guard Thread.isMainThread else {
+      return DispatchQueue.main.async { [weak self] in self?.didFinishLoadingFeed(with: feed) }
+    }
+    
     self.feedView.display(FeedViewModel(feed: feed))
     self.feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
   }
   
   func didFinishLoadingFeed(with error: Error) {
+    guard Thread.isMainThread else {
+      return DispatchQueue.main.async { [weak self] in self?.didFinishLoadingFeed(with: error) }
+    }
+    
     self.feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
   }
 }
