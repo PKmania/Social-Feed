@@ -43,3 +43,4 @@ final class FeedPresenter {
     self.feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
   }
 }
+
