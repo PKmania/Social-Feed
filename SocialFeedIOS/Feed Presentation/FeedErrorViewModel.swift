@@ -15,3 +15,4 @@ struct FeedErrorViewModel {
     return FeedErrorViewModel(message: message)
   }
 }
+
