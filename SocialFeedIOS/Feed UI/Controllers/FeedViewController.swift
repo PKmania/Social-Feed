@@ -9,10 +9,10 @@ protocol FeedViewControllerDelegate {
 }
 
 final public class FeedViewController: UITableViewController  {
-
+  
   private var viewAppeared = false
   var delegate: FeedViewControllerDelegate?
-
+  
   var tableModel = [FeedImageCellController]() {
     didSet {
       tableView.reloadData()
@@ -32,7 +32,7 @@ final public class FeedViewController: UITableViewController  {
     }
   }
   
-
+  
   @IBAction private func refresh() {
     delegate?.didRequestFeedRefresh()
   }
@@ -78,7 +78,7 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
 extension FeedViewController {
   
   private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-   return tableModel[indexPath.row]
+    return tableModel[indexPath.row]
   }
   
   private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {

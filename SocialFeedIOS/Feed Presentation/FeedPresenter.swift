@@ -16,7 +16,7 @@ protocol FeedView {
 final class FeedPresenter {
   var feedView: FeedView
   var feedLoadingView: FeedLoadingView
-
+  
   init(feedView: FeedView, feedLoadingView: FeedLoadingView) {
     self.feedView = feedView
     self.feedLoadingView = feedLoadingView
