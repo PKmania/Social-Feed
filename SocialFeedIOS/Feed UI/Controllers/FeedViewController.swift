@@ -8,9 +8,13 @@ protocol FeedViewControllerDelegate {
   func didRequestFeedRefresh()
 }
 
+
 final public class FeedViewController: UITableViewController  {
   
   private var viewAppeared = false
+  
+  @IBOutlet private(set) public var errorView: ErrorView?
+  
   var delegate: FeedViewControllerDelegate?
   
   var tableModel = [FeedImageCellController]() {
@@ -40,13 +44,20 @@ final public class FeedViewController: UITableViewController  {
 
 extension FeedViewController: FeedLoadingView {
   func display(_ viewModel: FeedLoadingViewModel) {
-    if viewModel.isLoading {
-      refreshControl?.beginRefreshing()
-    }else {
-      refreshControl?.endRefreshing()
+    refreshControl?.update(isRefreshing: viewModel.isLoading)
+  }
+}
+
+extension FeedViewController: FeedErrorView {
+  func display(_ viewModel: FeedErrorViewModel) {
+    if let errorMessage = viewModel.message {
+      errorView?.show(message: errorMessage)
+    } else {
+      errorView?.hideMessage()
     }
   }
 }
+
 extension FeedViewController {
   public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tableModel.count
