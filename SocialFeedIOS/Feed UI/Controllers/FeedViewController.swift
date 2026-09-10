@@ -54,11 +54,14 @@ extension FeedViewController: FeedLoadingView {
 
 extension FeedViewController: FeedErrorView {
   func display(_ viewModel: FeedErrorViewModel) {
-    errorView?.message = viewModel.message
+    if let errorMessage = viewModel.message {
+      errorView?.show(message: errorMessage)
+    } else {
+      errorView?.hideMessage()
+    }
   }
-  
-  
 }
+
 extension FeedViewController {
   public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tableModel.count

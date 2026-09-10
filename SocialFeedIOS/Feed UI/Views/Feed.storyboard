@@ -36,6 +36,9 @@
                                 <constraint firstAttribute="trailing" secondItem="eeG-j7-89B" secondAttribute="trailing" id="Sf3-is-ljl"/>
                                 <constraint firstAttribute="bottom" secondItem="eeG-j7-89B" secondAttribute="bottom" id="VvJ-UC-b9d"/>
                             </constraints>
+                            <connections>
+                                <outlet property="button" destination="eeG-j7-89B" id="tSO-Mj-1yC"/>
+                            </connections>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="FQJ-ri-l0g">
                             <rect key="frame" x="0.0" y="660" width="393" height="16"/>
