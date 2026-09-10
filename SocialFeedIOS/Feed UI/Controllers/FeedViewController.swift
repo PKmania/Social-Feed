@@ -14,7 +14,8 @@ public final class ErrorView: UIView {
 final public class FeedViewController: UITableViewController  {
   
   private var viewAppeared = false
-  public let errorView = ErrorView()
+  
+  @IBOutlet private(set) public var errorView: ErrorView?
   
   var delegate: FeedViewControllerDelegate?
   
@@ -55,7 +56,7 @@ extension FeedViewController: FeedLoadingView {
 
 extension FeedViewController: FeedErrorView {
   func display(_ viewModel: FeedErrorViewModel) {
-    errorView.message = viewModel.message
+    errorView?.message = viewModel.message
   }
   
   
