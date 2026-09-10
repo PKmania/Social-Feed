@@ -12,7 +12,7 @@ final class FeedLoaderPresentationAdaptor: FeedViewControllerDelegate {
     self.feedLoader = feedLoader
   }
   func didRequestFeedRefresh() {
-    presenter?.didStartFeedLoading()
+    presenter?.didStartLoadingFeed()
     feedLoader.load { [weak self] (result) in
       switch result {
       case let .success(feed):

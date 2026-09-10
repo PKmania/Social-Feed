@@ -3,7 +3,7 @@
 //
 
 import XCTest
-@testable import SocialFeedIOS
+import SocialFeed
 
 final class FeedLocalizationTests: XCTestCase {
   
@@ -25,6 +25,7 @@ final class FeedLocalizationTests: XCTestCase {
       }
     }
   }
+  
   
   // MARK: - Helpers
   

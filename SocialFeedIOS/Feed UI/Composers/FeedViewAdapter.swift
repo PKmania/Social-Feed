@@ -4,6 +4,7 @@
 
 import Foundation
 import UIKit
+import SocialFeed
 
 final class FeedViewAdapter: FeedView {
   private weak var controller: FeedViewController?
