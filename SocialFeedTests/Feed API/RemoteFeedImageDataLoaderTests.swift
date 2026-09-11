@@ -15,19 +15,30 @@ class RemoteFeedImageDataLoader {
   public enum Error: Swift.Error {
     case invalidData
   }
-  func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) {    client.get(from: url) { [weak self] (result) in
-    guard self != nil else { return }
-    switch result {
-    case let .success((data, response)):
-      if response.statusCode == 200, !data.isEmpty {
-                completion(.success(data))
-              } else {
-                completion(.failure(Error.invalidData))
-              }
-    case let .failure(error):
-      completion(.failure(error))
+  
+  private struct HTTPTaskWrapper: FeedImageDataLoaderTask {
+    let wrapped: HTTPClientTask
+    
+    func cancel() {
+      wrapped.cancel()
     }
   }
+  
+  @discardableResult
+  func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
+    return HTTPTaskWrapper(wrapped: client.get(from: url) { [weak self] result in
+      guard self != nil else { return }
+      switch result {
+      case let .success((data, response)):
+        if response.statusCode == 200, !data.isEmpty {
+          completion(.success(data))
+        } else {
+          completion(.failure(Error.invalidData))
+        }
+      case let .failure(error):
+        completion(.failure(error))
+      }
+    })
   }
 }
 
@@ -80,13 +91,13 @@ class RemoteFeedImageDataLoaderTests: XCTestCase {
   }
   
   func test_loadImageDataFromURL_deliversInvalidDataErrorOn200HTTPResponseWithEmptyData() {
-      let (sut, client) = makeSUT()
-      
-      expect(sut, toCompleteWith: failure(.invalidData), when: {
-        let emptyData = Data()
-        client.complete(withStatusCode: 200, data: emptyData)
-      })
-    }
+    let (sut, client) = makeSUT()
+    
+    expect(sut, toCompleteWith: failure(.invalidData), when: {
+      let emptyData = Data()
+      client.complete(withStatusCode: 200, data: emptyData)
+    })
+  }
   
   func test_loadImageDataFromURL_deliversReceivedNonEmptyDataOn200HTTPResponse() {
     let (sut, client) = makeSUT()
@@ -157,12 +168,19 @@ class RemoteFeedImageDataLoaderTests: XCTestCase {
   
   private class HTTPClientSpy: HTTPClient{
     private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
+    private(set) var cancelledURLs = [URL]()
+    
     var requestedURLs: [URL] {
       return messages.map { $0.url }
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
+    private struct Task: HTTPClientTask {
+      func cancel() {}
+    }
+    
+    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
       messages.append((url, completion))
+      return Task()
     }
     
     func complete(with error: Error, at index: Int = 0) {
