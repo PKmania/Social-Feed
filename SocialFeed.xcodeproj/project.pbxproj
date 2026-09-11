@@ -77,6 +77,20 @@
 			);
 			target = 5D4A0A482FFA26E700D2376B /* SocialFeedCacheIntegrationTests */;
 		};
+		5D51B8293053D5F700D533C3 /* Exceptions for "SocialFeed" folder in "SocialFeed" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Feed Feature/FeedImageDataLoader.swift",
+			);
+			target = 5DF8C4192F91FACF00388F6B /* SocialFeed */;
+		};
+		5D51B82A3053D5F700D533C3 /* Exceptions for "SocialFeed" folder in "SocialFeedIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Feed Feature/FeedImageDataLoader.swift",
+			);
+			target = 5D619BC03000AE7800F34E27 /* SocialFeedIOS */;
+		};
 		5D619CAE3001795000F34E27 /* Exceptions for "SocialFeedTests" folder in "SocialFeedIOSTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -117,6 +131,10 @@
 		};
 		5DF8C41C2F91FACF00388F6B /* SocialFeed */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5D51B8293053D5F700D533C3 /* Exceptions for "SocialFeed" folder in "SocialFeed" target */,
+				5D51B82A3053D5F700D533C3 /* Exceptions for "SocialFeed" folder in "SocialFeedIOS" target */,
+			);
 			path = SocialFeed;
 			sourceTree = "<group>";
 		};
