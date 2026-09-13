@@ -34,27 +34,13 @@ class URLSessionHTTPClientTests: XCTestCase {
     XCTAssertEqual(receivedError?.domain, requestError.domain)
     XCTAssertEqual(receivedError?.code, requestError.code)
   }
+
   func test_cancelGetFromURLTask_cancelsURLRequest() {
-    let url = anyURL()
-    let exp = expectation(description: "Wait for request")
-    
-    let task = makeSUT().get(from: url) { result in
-      switch result {
-      case let .failure(error as NSError) where error.code == URLError.cancelled.rawValue:
-        break
-        
-      default:
-        XCTFail("Expected cancelled result, got \(result) instead")
-      }
-      exp.fulfill()
-    }
-    
-    task.cancel()
-    wait(for: [exp], timeout: 1.0)
-    
-    let receivedError = resultErrorFor(taskHandler: { $0.cancel() }) as NSError?
-    
-    XCTAssertEqual(receivedError?.code, URLError.cancelled.rawValue)
+    var task: HTTPClientTask?
+      URLProtocolStub.onStartLoading { task?.cancel() }
+    let receivedError = resultErrorFor(taskHandler: { task = $0 }) as NSError?
+
+      XCTAssertEqual(receivedError?.code, URLError.cancelled.rawValue)
   }
   func test_getFromURL_failsOnAllInvalidRepresentationCases() {
     
