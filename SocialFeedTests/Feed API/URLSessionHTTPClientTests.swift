@@ -8,14 +8,9 @@ import SocialFeed
 
 class URLSessionHTTPClientTests: XCTestCase {
   
-  override func setUp() {
-    super.setUp()
-    URLProtocolStub.startInterceptingRequests()
-  }
-  
   override func tearDown() {
     super.tearDown()
-    URLProtocolStub.stopInterceptingRequests()
+    URLProtocolStub.removeStub()
   }
   
   func test_getFromURL_performGETRequestWithURL() {
@@ -99,10 +94,15 @@ class URLSessionHTTPClientTests: XCTestCase {
   
   //MARK: Helpers
   private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> HTTPClient {
-    let sut = URLSessionHTTPClient()
-    trackMemoryLeaks(sut)
+    let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        let session = URLSession(configuration: configuration)
+        
+        let sut = URLSessionHTTPClient(session: session)
+    trackMemoryLeaks(sut, file: file, line: line)
     return sut
   }
+  
   
   
   private func anyData() -> Data {
@@ -174,12 +174,7 @@ class URLSessionHTTPClientTests: XCTestCase {
 
         private static let queue = DispatchQueue(label: "URLProtocolStub.queue")
     
-    static func startInterceptingRequests() {
-      URLProtocol.registerClass(URLProtocolStub.self)
-    }
-    
-    static func stopInterceptingRequests() {
-      URLProtocol.unregisterClass(URLProtocolStub.self)
+    static func removeStub() {
       stub = nil
     }
     
