@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteFeedImageDataLoader {
+public final class RemoteFeedImageDataLoader: FeedImageDataLoader{
   private let client: HTTPClient
   
   public init(client: HTTPClient) {
@@ -24,24 +24,24 @@ public final class RemoteFeedImageDataLoader {
     init(_ completion: @escaping (FeedImageDataLoader.Result) -> Void) {
       self.completion = completion
     }
-      
+    
     func complete(with result: FeedImageDataLoader.Result) {
-        completion?(result)
-      }
+      completion?(result)
+    }
     func cancel() {
       preventFurtherCompletions()
       wrapped?.cancel()
     }
     
     private func preventFurtherCompletions() {
-          completion = nil
-        }
+      completion = nil
+    }
   }
   
   @discardableResult
   public func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
     let task = HTTPClientTaskWrapper(completion)
-        task.wrapped = client.get(from: url) { [weak self] result in
+    task.wrapped = client.get(from: url) { [weak self] result in
       guard self != nil else { return }
       switch result {
       case let .success((data, response)):
