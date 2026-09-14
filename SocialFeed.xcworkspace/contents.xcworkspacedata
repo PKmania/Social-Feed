@@ -7,5 +7,7 @@
    <FileRef
       location = "container:SocialApp/SocialApp.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:SocialApp/SocialApp.xctestplan">
+   </FileRef>
 </Workspace>
-

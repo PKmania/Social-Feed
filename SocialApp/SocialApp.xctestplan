@@ -1,0 +1,40 @@
+{
+  "configurations" : [
+    {
+      "id" : "158C553E-DF3F-43DE-92C7-FDE08C1FBAEA",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:SocialApp.xcodeproj",
+          "identifier" : "5D51B8A73058222600D533C3",
+          "name" : "SocialApp"
+        }
+      ]
+    },
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SocialApp.xcodeproj",
+      "identifier" : "5D51B8A73058222600D533C3",
+      "name" : "SocialApp"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialApp.xcodeproj",
+        "identifier" : "5D51B8BD3058222700D533C3",
+        "name" : "SocialAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}
