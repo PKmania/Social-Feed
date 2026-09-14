@@ -53,6 +53,7 @@ class CacheFeedImageDataUseCaseTests: XCTestCase {
 
       XCTAssertTrue(received.isEmpty, "Expected no received results after instance has been deallocated")
     }
+  
   // MARK: - Helpers
   
   private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalFeedImageDataLoader, store: FeedImageDataStoreSpy) {
