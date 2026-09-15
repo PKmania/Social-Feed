@@ -8,11 +8,7 @@ import XCTest
 import SocialFeed
 import SocialApp
 
-public protocol FeedImageDataCache {
-  typealias Result = Swift.Result<Void, Error>
 
-  func save(_ data: Data, for url: URL, completion: @escaping (Result) -> Void)
-}
 
 public final class FeedImageDataLoaderCacheDecorator: FeedImageDataLoader {
   private let decoratee: FeedImageDataLoader
