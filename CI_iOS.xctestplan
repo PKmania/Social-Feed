@@ -20,6 +20,11 @@
           "containerPath" : "container:SocialFeed.xcodeproj",
           "identifier" : "5D619BC03000AE7800F34E27",
           "name" : "SocialFeedIOS"
+        },
+        {
+          "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
+          "identifier" : "5D51B8A73058222600D533C3",
+          "name" : "SocialApp"
         }
       ]
     },
@@ -56,6 +61,14 @@
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5DF8C4222F91FACF00388F6B",
         "name" : "SocialFeedTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
+        "identifier" : "5D51B8BD3058222700D533C3",
+        "name" : "SocialAppTests"
       }
     }
   ],

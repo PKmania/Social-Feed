@@ -25,7 +25,7 @@ extension LocalFeedImageDataLoader {
     }
   }
 }
-extension LocalFeedImageDataLoader {
+extension LocalFeedImageDataLoader: FeedImageDataLoader {
   
   private final class LoadImageDataTask: FeedImageDataLoaderTask {
     private var completion: ((FeedImageDataLoader.Result) -> Void)?
