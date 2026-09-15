@@ -8,7 +8,7 @@ import XCTest
 import SocialFeed
 protocol FeedCache {
   typealias Result = Swift.Result<Void, Error>
-
+  
   func save(_ feed: [FeedImage], completion: @escaping (Result) -> Void)
 }
 
@@ -23,11 +23,11 @@ final class FeedLoaderCacheDecorator: FeedLoader {
   
   func load(completion: @escaping (FeedLoader.Result) -> Void) {
     decoratee.load { [weak self] result in
-      if let feed = try? result.get() {
-              self?.cache.save(feed) { _ in }
-            }
-      completion(result)
-        }
+      completion(result.map({ feed in
+        self?.cache.save(feed) { _ in }
+        return feed
+      }))
+    }
   }
 }
 
@@ -50,7 +50,7 @@ class FeedLoaderCacheDecoratorTests: XCTestCase, FeedLoaderTestCase {
     let cache = CacheSpy()
     let feed = uniqueFeed()
     let sut = makeSUT(loaderResult: .success(feed), cache: cache)
-
+    
     sut.load { _ in }
     
     XCTAssertEqual(cache.messages, [.save(feed)], "Expected to cache loaded feed on success")
@@ -59,9 +59,9 @@ class FeedLoaderCacheDecoratorTests: XCTestCase, FeedLoaderTestCase {
   func test_load_doesNotCacheOnLoaderFailure() {
     let cache = CacheSpy()
     let sut = makeSUT(loaderResult: .failure(anyNSError()), cache: cache)
-
+    
     sut.load { _ in }
-
+    
     XCTAssertTrue(cache.messages.isEmpty, "Expected not to cache feed on load error")
   }
   // MARK: - Helpers
@@ -76,15 +76,15 @@ class FeedLoaderCacheDecoratorTests: XCTestCase, FeedLoaderTestCase {
   }
   
   private class CacheSpy: FeedCache {
-      private(set) var messages = [Message]()
-      
-      enum Message: Equatable {
-        case save([FeedImage])
-      }
-      
-      func save(_ feed: [FeedImage], completion: @escaping (FeedCache.Result) -> Void) {
-        messages.append(.save(feed))
-        completion(.success(()))
-      }
+    private(set) var messages = [Message]()
+    
+    enum Message: Equatable {
+      case save([FeedImage])
     }
+    
+    func save(_ feed: [FeedImage], completion: @escaping (FeedCache.Result) -> Void) {
+      messages.append(.save(feed))
+      completion(.success(()))
+    }
+  }
 }
