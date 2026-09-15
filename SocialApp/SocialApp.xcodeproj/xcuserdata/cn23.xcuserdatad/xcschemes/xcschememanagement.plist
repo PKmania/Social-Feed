@@ -3,11 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
+	<dict/>
+	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>SocialApp.xcscheme_^#shared#^_</key>
+		<key>5D51B8A73058222600D533C3</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D51B8BD3058222700D533C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D51B8C73058222800D533C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
