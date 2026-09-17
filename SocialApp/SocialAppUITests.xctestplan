@@ -1,0 +1,26 @@
+{
+  "configurations" : [
+    {
+      "id" : "ED6A37BA-86E4-4961-8749-6A6C53890EF1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
+        "identifier" : "5D51B8C73058222800D533C3",
+        "name" : "SocialAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

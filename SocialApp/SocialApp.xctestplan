@@ -12,7 +12,7 @@
     "codeCoverage" : {
       "targets" : [
         {
-          "containerPath" : "container:SocialApp.xcodeproj",
+          "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
           "identifier" : "5D51B8A73058222600D533C3",
           "name" : "SocialApp"
         }
@@ -30,7 +30,7 @@
     {
       "parallelizable" : true,
       "target" : {
-        "containerPath" : "container:SocialApp.xcodeproj",
+        "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
         "identifier" : "5D51B8BD3058222700D533C3",
         "name" : "SocialAppTests"
       }
