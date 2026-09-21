@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "158C553E-DF3F-43DE-92C7-FDE08C1FBAEA",
+      "id" : "858BBEB6-126A-4C0A-821E-04339AC0A71E",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -15,6 +15,16 @@
           "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
           "identifier" : "5D51B8A73058222600D533C3",
           "name" : "SocialApp"
+        },
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5DF8C4192F91FACF00388F6B",
+          "name" : "SocialFeed"
+        },
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5D619BC03000AE7800F34E27",
+          "name" : "SocialFeedIOS"
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "ED6A37BA-86E4-4961-8749-6A6C53890EF1",
+      "id" : "DEF1DF5E-66FD-4CCB-8AB9-2B46ED6CCC39",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -9,6 +9,25 @@
     }
   ],
   "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
+          "identifier" : "5D51B8A73058222600D533C3",
+          "name" : "SocialApp"
+        },
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5DF8C4192F91FACF00388F6B",
+          "name" : "SocialFeed"
+        },
+        {
+          "containerPath" : "container:SocialFeed.xcodeproj",
+          "identifier" : "5D619BC03000AE7800F34E27",
+          "name" : "SocialFeedIOS"
+        }
+      ]
+    },
     "performanceAntipatternCheckerEnabled" : true,
     "testExecutionOrdering" : "random"
   },
