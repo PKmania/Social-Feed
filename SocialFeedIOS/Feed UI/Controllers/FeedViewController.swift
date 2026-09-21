@@ -18,6 +18,8 @@ final public class FeedViewController: UITableViewController  {
   
   public var delegate: FeedViewControllerDelegate?
   
+  private var loadingControllers = [IndexPath: FeedImageCellController]()
+  
   private var tableModel = [FeedImageCellController]() {
     didSet {
       tableView.reloadData()
@@ -45,6 +47,7 @@ final public class FeedViewController: UITableViewController  {
     delegate?.didRequestFeedRefresh()
   }
   public func display(_ cellController: [FeedImageCellController]) {
+    loadingControllers = [:]
     tableModel = cellController
   }
 }
@@ -96,10 +99,13 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
 extension FeedViewController {
   
   private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-    return tableModel[indexPath.row]
+    let controller = tableModel[indexPath.row]
+          loadingControllers[indexPath] = controller
+          return controller
   }
   
   private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
-    cellController(forRowAt: indexPath).cancel()
+    loadingControllers[indexPath]?.cancel()
+            loadingControllers[indexPath] = nil
   }
 }

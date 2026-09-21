@@ -41,7 +41,7 @@ public final class FeedImageCellController: FeedImageView {
     delegate.didRequestImage()
   }
   
-  func cancel() {
+  public func cancel() {
     releaseCellForReuse()
     delegate.didCancelImageRequest()
   }

@@ -43,7 +43,6 @@
 		5D51B8BE3058222700D533C3 /* SocialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE30AC730582940008AA534 /* SocialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE30AC830582940008AA534 /* SocialFeedIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocialFeedIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5DE311B630611802008AA534 /* SocialApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SocialApp.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -95,7 +94,6 @@
 		5D51B89F3058222600D533C3 = {
 			isa = PBXGroup;
 			children = (
-				5DE311B630611802008AA534 /* SocialApp.xctestplan */,
 				5D51B8AA3058222600D533C3 /* SocialApp */,
 				5D51B8C13058222800D533C3 /* SocialAppTests */,
 				5DE30AC630582940008AA534 /* Frameworks */,

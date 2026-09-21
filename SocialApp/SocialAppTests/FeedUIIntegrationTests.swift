@@ -94,7 +94,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
     
     sut.simulateUserInitiatedFeedReload()
-      XCTAssertEqual(sut.errorMessage, nil)
+    XCTAssertEqual(sut.errorMessage, nil)
   }
   
   func test_feedImageView_loadsImageURLWhenVisible() {
@@ -335,6 +335,20 @@ final class FeedUIIntegrationTests: XCTestCase {
     wait(for: [exp], timeout: 1.0)
   }
   
+  func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+    let image0 = makeImage()
+    let image1 = makeImage()
+    let (sut, loader) = makeSUT()
+    
+    sut.loadViewIfNeeded()
+    loader.completeFeedLoading(with: [image0, image1], at: 0)
+    assertThat(sut, isRendering: [image0, image1])
+    
+    sut.simulateUserInitiatedFeedReload()
+    loader.completeFeedLoading(with: [], at: 1)
+    assertThat(sut, isRendering: [])
+  }
+  
   //MARK: - Helpers
   
   private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
@@ -345,7 +359,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     return (sut, loader)
   }
   
-
+  
   private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
     return FeedImage(id: UUID(), description: description, location: location, url: url)
   }
@@ -354,5 +368,5 @@ final class FeedUIIntegrationTests: XCTestCase {
     return UIImage.make(withColor: .red).pngData()!
   }
   
-
+  
 }
