@@ -70,14 +70,6 @@
         "identifier" : "5D51B8BD3058222700D533C3",
         "name" : "SocialAppTests"
       }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
-        "identifier" : "5D51B8C73058222800D533C3",
-        "name" : "SocialAppUITests"
-      }
     }
   ],
   "version" : 1
