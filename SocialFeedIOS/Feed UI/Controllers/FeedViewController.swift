@@ -36,7 +36,10 @@ final public class FeedViewController: UITableViewController  {
       viewAppeared = true
     }
   }
-  
+  public override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    tableView.sizeTableHeaderToFit()
+  }
   
   @IBAction private func refresh() {
     delegate?.didRequestFeedRefresh()
@@ -57,7 +60,7 @@ extension FeedViewController: FeedErrorView {
     if let errorMessage = viewModel.message {
       errorView?.show(message: errorMessage)
     } else {
-      errorView?.hideMessage()
+      errorView?.hideMessageAnimated()
     }
   }
 }
