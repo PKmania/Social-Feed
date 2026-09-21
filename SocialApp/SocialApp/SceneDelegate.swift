@@ -71,8 +71,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               decoratee: remoteImageLoader,
               cache: localImageLoader)))
    let navVC =  UINavigationController(rootViewController: feedViewController)
-    window?.rootViewController = navVC
     window?.makeKeyAndVisible()
+    window?.rootViewController = navVC
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {
