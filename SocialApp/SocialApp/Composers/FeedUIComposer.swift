@@ -5,6 +5,7 @@
 import Foundation
 import SocialFeed
 import UIKit
+import SocialFeedIOS
 
 public final class FeedUIComposer {
   private init() {}

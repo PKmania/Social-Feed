@@ -4,6 +4,7 @@
 
 import Foundation
 import SocialFeed
+import SocialFeedIOS
 
 final class FeedImageDataLoaderPresentationAdaptor<View: FeedImageView, Image>: FeedImageCellControllerDelegate where View.Image == Image {
   private var task: FeedImageDataLoaderTask?

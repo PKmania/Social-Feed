@@ -5,7 +5,7 @@
 import UIKit
 import SocialFeed
 
-protocol FeedViewControllerDelegate {
+public protocol FeedViewControllerDelegate {
   func didRequestFeedRefresh()
 }
 
@@ -16,7 +16,7 @@ final public class FeedViewController: UITableViewController  {
   
   @IBOutlet private(set) public var errorView: ErrorView?
   
-  var delegate: FeedViewControllerDelegate?
+  public var delegate: FeedViewControllerDelegate?
   
   private var tableModel = [FeedImageCellController]() {
     didSet {
