@@ -18,7 +18,7 @@ final public class FeedViewController: UITableViewController  {
   
   var delegate: FeedViewControllerDelegate?
   
-  var tableModel = [FeedImageCellController]() {
+  private var tableModel = [FeedImageCellController]() {
     didSet {
       tableView.reloadData()
     }
@@ -40,6 +40,9 @@ final public class FeedViewController: UITableViewController  {
   
   @IBAction private func refresh() {
     delegate?.didRequestFeedRefresh()
+  }
+  public func display(_ cellController: [FeedImageCellController]) {
+    tableModel = cellController
   }
 }
 

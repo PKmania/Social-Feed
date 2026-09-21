@@ -51,6 +51,8 @@
 		5D51B8C83058222800D533C3 /* SocialAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocialAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE30AC730582940008AA534 /* SocialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DE30AC830582940008AA534 /* SocialFeedIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocialFeedIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DE311B630611802008AA534 /* SocialApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = SocialApp.xctestplan; sourceTree = "<group>"; };
+		5DE311B73061181C008AA534 /* SocialAppUITests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = SocialAppUITests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -114,6 +116,8 @@
 		5D51B89F3058222600D533C3 = {
 			isa = PBXGroup;
 			children = (
+				5DE311B73061181C008AA534 /* SocialAppUITests.xctestplan */,
+				5DE311B630611802008AA534 /* SocialApp.xctestplan */,
 				5D51B8AA3058222600D533C3 /* SocialApp */,
 				5D51B8C13058222800D533C3 /* SocialAppTests */,
 				5D51B8CB3058222800D533C3 /* SocialAppUITests */,
@@ -233,6 +237,7 @@
 					};
 					5D51B8C73058222800D533C3 = {
 						CreatedOnToolsVersion = 26.5;
+						LastSwiftMigration = 2650;
 						TestTargetID = 5D51B8A73058222600D533C3;
 					};
 				};
@@ -555,6 +560,7 @@
 		5D51B8DA3058222800D533C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W3LF34V6H4;
@@ -565,6 +571,8 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialAppUITests/SocialAppUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,6 +583,7 @@
 		5D51B8DB3058222800D533C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W3LF34V6H4;
@@ -585,6 +594,7 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "SocialAppUITests/SocialAppUITests-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

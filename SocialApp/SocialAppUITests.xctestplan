@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "858BBEB6-126A-4C0A-821E-04339AC0A71E",
+      "id" : "DEF1DF5E-66FD-4CCB-8AB9-2B46ED6CCC39",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -29,11 +29,6 @@
       ]
     },
     "performanceAntipatternCheckerEnabled" : true,
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:SocialApp.xcodeproj",
-      "identifier" : "5D51B8A73058222600D533C3",
-      "name" : "SocialApp"
-    },
     "testExecutionOrdering" : "random"
   },
   "testTargets" : [
@@ -41,8 +36,8 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
-        "identifier" : "5D51B8BD3058222700D533C3",
-        "name" : "SocialAppTests"
+        "identifier" : "5D51B8C73058222800D533C3",
+        "name" : "SocialAppUITests"
       }
     }
   ],
