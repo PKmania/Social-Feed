@@ -5,7 +5,7 @@
 import UIKit
 import SocialFeed
 
-protocol FeedViewControllerDelegate {
+public protocol FeedViewControllerDelegate {
   func didRequestFeedRefresh()
 }
 
@@ -16,7 +16,9 @@ final public class FeedViewController: UITableViewController  {
   
   @IBOutlet private(set) public var errorView: ErrorView?
   
-  var delegate: FeedViewControllerDelegate?
+  public var delegate: FeedViewControllerDelegate?
+  
+  private var loadingControllers = [IndexPath: FeedImageCellController]()
   
   private var tableModel = [FeedImageCellController]() {
     didSet {
@@ -36,12 +38,16 @@ final public class FeedViewController: UITableViewController  {
       viewAppeared = true
     }
   }
-  
+  public override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    tableView.sizeTableHeaderToFit()
+  }
   
   @IBAction private func refresh() {
     delegate?.didRequestFeedRefresh()
   }
   public func display(_ cellController: [FeedImageCellController]) {
+    loadingControllers = [:]
     tableModel = cellController
   }
 }
@@ -57,7 +63,7 @@ extension FeedViewController: FeedErrorView {
     if let errorMessage = viewModel.message {
       errorView?.show(message: errorMessage)
     } else {
-      errorView?.hideMessage()
+      errorView?.hideMessageAnimated()
     }
   }
 }
@@ -93,10 +99,13 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
 extension FeedViewController {
   
   private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-    return tableModel[indexPath.row]
+    let controller = tableModel[indexPath.row]
+          loadingControllers[indexPath] = controller
+          return controller
   }
   
   private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
-    cellController(forRowAt: indexPath).cancel()
+    loadingControllers[indexPath]?.cancel()
+            loadingControllers[indexPath] = nil
   }
 }

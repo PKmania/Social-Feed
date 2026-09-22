@@ -5,6 +5,7 @@
 import Foundation
 import UIKit
 import SocialFeed
+import SocialFeedIOS
 
 final class WeakRefVirtualProxy<T: AnyObject> {
   private weak var object: T?

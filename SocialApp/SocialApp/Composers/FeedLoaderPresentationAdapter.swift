@@ -4,14 +4,15 @@
 
 import Foundation
 import SocialFeed
+import SocialFeedIOS
 
-final class FeedLoaderPresentationAdaptor: FeedViewControllerDelegate {
+public final class FeedLoaderPresentationAdaptor: FeedViewControllerDelegate {
   private let feedLoader: FeedLoader
   var presenter: FeedPresenter?
-  init(feedLoader: FeedLoader) {
+  public init(feedLoader: FeedLoader) {
     self.feedLoader = feedLoader
   }
-  func didRequestFeedRefresh() {
+  public func didRequestFeedRefresh() {
     presenter?.didStartLoadingFeed()
     feedLoader.load { [weak self] (result) in
       switch result {
