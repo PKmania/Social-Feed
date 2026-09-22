@@ -6,13 +6,23 @@ import Foundation
 import SocialFeed
 import UIKit
 import SocialFeedIOS
+import Combine
 
 public final class FeedUIComposer {
   private init() {}
-  public static func feedComposeWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
-    let presenterAdapter = FeedLoaderPresentationAdaptor(feedLoader: MainQueueDispatchDecorator(decoratee: feedLoader))
-   let feedController = makeFeedViewController(delegate: presenterAdapter, title: FeedPresenter.title)
-    let viewAdapter = FeedViewAdapter(controller: feedController, imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader))
+  public static func feedComposeWith(
+    feedLoader: @escaping () -> FeedLoader.Publisher,
+    imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher
+  ) -> FeedViewController {
+    let presenterAdapter = FeedLoaderPresentationAdaptor(feedLoader: feedLoader)
+    
+   let feedController = makeFeedViewController(
+    delegate: presenterAdapter,
+    title: FeedPresenter.title
+   )
+    
+    let viewAdapter = FeedViewAdapter(controller: feedController, imageLoader: imageLoader)
+    
     let presenter = FeedPresenter(feedView: viewAdapter, loadingView: WeakRefVirtualProxy(feedController), errorView: WeakRefVirtualProxy(feedController))
     presenterAdapter.presenter = presenter
     return feedController
