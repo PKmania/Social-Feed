@@ -5,7 +5,7 @@
 import Foundation
 import UIKit
 import SocialFeed
-protocol FeedImageCellControllerDelegate {
+public protocol FeedImageCellControllerDelegate {
   func didRequestImage()
   func didCancelImageRequest()
 }
@@ -14,7 +14,7 @@ public final class FeedImageCellController: FeedImageView {
   private var delegate: FeedImageCellControllerDelegate
   private var cell: FeedImageCell?
   
-  init(delegate: FeedImageCellControllerDelegate) {
+  public init(delegate: FeedImageCellControllerDelegate) {
     self.delegate = delegate
   }
   
@@ -41,7 +41,7 @@ public final class FeedImageCellController: FeedImageView {
     delegate.didRequestImage()
   }
   
-  func cancel() {
+  public func cancel() {
     releaseCellForReuse()
     delegate.didCancelImageRequest()
   }
