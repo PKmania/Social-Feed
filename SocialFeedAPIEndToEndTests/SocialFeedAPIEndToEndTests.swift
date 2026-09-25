@@ -63,7 +63,7 @@ final class SocialFeedAPIEndToEndTests: XCTestCase {
   }
   
   private func getFeedResult(file: StaticString = #file, line: UInt = #line) -> FeedLoader.Result? {
-    let loader = RemoteFeedLoader(url: feedTestServerURL, client: ephemeralClient())
+    let loader = RemoteLoader(url: feedTestServerURL, client: ephemeralClient(), mapper: FeedItemsMapper.map)
     trackMemoryLeaks(loader, file: file, line: line)
 
     let exp = expectation(description: "Wait for load completion")
