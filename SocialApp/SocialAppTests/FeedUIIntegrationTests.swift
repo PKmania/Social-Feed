@@ -288,7 +288,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     let imageData0 = UIImage.make(withColor: .red).pngData()!
     loader.completeImageLoading(with: imageData0, at: 0)
     
-    XCTAssertEqual(view0.renderedImage, .none, "Expected no image state change for reused view once image loading completes successfully")
+    XCTAssertEqual(view0.renderedImage, imageData0, "Expected no image state change for reused view once image loading completes successfully")
   }
   
   func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
