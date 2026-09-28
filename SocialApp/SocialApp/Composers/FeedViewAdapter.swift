@@ -8,8 +8,12 @@ import SocialFeed
 import SocialFeedIOS
 
 public final class FeedViewAdapter: ResourceView {
+  
+  private typealias ImageDataPresentationAdapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>
+  
   private weak var controller: FeedViewController?
   private var imageLoader: (URL) -> FeedImageDataLoader.Publisher
+  
   
   public init(controller: FeedViewController, imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher) {
     self.controller = controller
@@ -17,7 +21,7 @@ public final class FeedViewAdapter: ResourceView {
   }
   public func display(_ viewModel: FeedViewModel) {
     controller?.display(viewModel.feed.map({ model in
-      let adapter = LoadResourcePresentationAdapter<Data, WeakRefVirtualProxy<FeedImageCellController>>(loader: { [imageLoader] in
+      let adapter = ImageDataPresentationAdapter(loader: { [imageLoader] in
         imageLoader(model.url)
       })
       
