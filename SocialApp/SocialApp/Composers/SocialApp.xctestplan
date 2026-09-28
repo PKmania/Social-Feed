@@ -20,7 +20,7 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
         "identifier" : "5D51B8BD3058222700D533C3",

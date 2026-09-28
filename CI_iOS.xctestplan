@@ -32,7 +32,7 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5DD5288C2F979B82006F07D8",
@@ -40,7 +40,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5D4A0A482FFA26E700D2376B",
@@ -48,7 +48,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5D619BC83000AE7900F34E27",
@@ -56,7 +56,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5DF8C4222F91FACF00388F6B",
@@ -64,7 +64,7 @@
       }
     },
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialApp\/SocialApp.xcodeproj",
         "identifier" : "5D51B8BD3058222700D533C3",
