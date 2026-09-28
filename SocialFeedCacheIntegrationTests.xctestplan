@@ -23,7 +23,7 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:SocialFeed.xcodeproj",
         "identifier" : "5D4A0A482FFA26E700D2376B",

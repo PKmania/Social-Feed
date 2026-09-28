@@ -8,26 +8,30 @@
 import Foundation
 import SocialFeed
 import SocialFeedIOS
+import Combine
+
 extension FeedUIIntegrationTests {
-  class LoaderSpy: FeedLoader, FeedImageDataLoader {
+  class LoaderSpy: FeedImageDataLoader {
     
     //MARK: - FeedLoader
-    private var feedRequest = [(FeedLoader.Result) -> Void]()
+    private var feedRequests = [PassthroughSubject<[FeedImage], Error>]()
     var loadFeedCallCount: Int {
-      feedRequest.count
+      feedRequests.count
     }
     
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-      feedRequest.append(completion)
-    }
+    func loadPublisher() -> AnyPublisher<[FeedImage], Error> {
+               let publisher = PassthroughSubject<[FeedImage], Error>()
+               feedRequests.append(publisher)
+               return publisher.eraseToAnyPublisher()
+           }
     
     func completeFeedLoading(with feed: [FeedImage] = [], at index: Int = 0) {
-      feedRequest[index](.success(feed))
+      feedRequests[index].send(feed)
     }
     
     func completeFeedLoadingWithError(at index: Int) {
       let error = NSError(domain: "a error", code: 0)
-      feedRequest[index](.failure(error))
+      feedRequests[index].send(completion: .failure(error))
     }
     
     //MARK: - FeedImageDataLoader

@@ -7,12 +7,12 @@ import SocialFeed
 import SocialFeedIOS
 import Combine
 
-public final class FeedLoaderPresentationAdaptor: FeedViewControllerDelegate {
-  private let feedLoader: () -> FeedLoader.Publisher
+public final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
+  private let feedLoader: () -> AnyPublisher<[FeedImage], Error>
   var presenter: FeedPresenter?
   private var cancellable: Cancellable?
   
-  public init(feedLoader: @escaping () -> FeedLoader.Publisher) {
+  public init(feedLoader: @escaping () -> AnyPublisher<[FeedImage], Error>) {
     self.feedLoader = feedLoader
   }
   public func didRequestFeedRefresh() {
