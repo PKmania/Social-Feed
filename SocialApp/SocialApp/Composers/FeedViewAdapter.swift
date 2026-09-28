@@ -7,7 +7,7 @@ import UIKit
 import SocialFeed
 import SocialFeedIOS
 
-public final class FeedViewAdapter: FeedView {
+public final class FeedViewAdapter: ResourceView {
   private weak var controller: FeedViewController?
   private var imageLoader: (URL) -> FeedImageDataLoader.Publisher
   
