@@ -20,9 +20,9 @@ public final class FeedUIComposer {
     let presenterAdapter = FeedPresentationAdapter(loader: feedLoader)
     
    let feedController = makeFeedViewController(
-    delegate: presenterAdapter,
     title: FeedPresenter.title
    )
+    feedController.onRefresh = presenterAdapter.loadResource
     
     let viewAdapter = FeedViewAdapter(
       controller: feedController,
@@ -39,11 +39,10 @@ public final class FeedUIComposer {
     return feedController
   }
 
-  private static func makeFeedViewController(delegate: FeedViewControllerDelegate, title: String) -> ListViewController {
+  private static func makeFeedViewController(title: String) -> ListViewController {
     let bundle = Bundle(for: ListViewController.self)
     let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
     let feedController = storyboard.instantiateInitialViewController() as! ListViewController
-    feedController.delegate = delegate
     feedController.title = FeedPresenter.title
     return feedController
   }
