@@ -15,7 +15,7 @@ public protocol CellController {
     func cancelLoad()
 }
 
-final public class FeedViewController: UITableViewController  {
+final public class ListViewController: UITableViewController  {
   
   private var viewAppeared = false
   
@@ -57,13 +57,13 @@ final public class FeedViewController: UITableViewController  {
   }
 }
 
-extension FeedViewController: ResourceLoadingView {
+extension ListViewController: ResourceLoadingView {
   public func display(_ viewModel: ResourceLoadingViewModel) {
     refreshControl?.update(isRefreshing: viewModel.isLoading)
   }
 }
 
-extension FeedViewController: ResourceErrorView {
+extension ListViewController: ResourceErrorView {
   public func display(_ viewModel: ResourceErrorViewModel) {
     if let errorMessage = viewModel.message {
       errorView?.show(message: errorMessage)
@@ -73,7 +73,7 @@ extension FeedViewController: ResourceErrorView {
   }
 }
 
-extension FeedViewController {
+extension ListViewController {
   public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tableModel.count
   }
@@ -87,7 +87,7 @@ extension FeedViewController {
   }
 }
 
-extension FeedViewController: UITableViewDataSourcePrefetching {
+extension ListViewController: UITableViewDataSourcePrefetching {
   public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
     indexPaths.forEach { indexPath in
       cellController(forRowAt: indexPath).preload()
@@ -96,13 +96,9 @@ extension FeedViewController: UITableViewDataSourcePrefetching {
   public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
     indexPaths.forEach(cancelCellControllerLoad)
   }
-  
-  
-  
 }
 //MARK: - Private Methods
-extension FeedViewController {
-  
+extension ListViewController {
   private func cellController(forRowAt indexPath: IndexPath) -> CellController {
     let controller = tableModel[indexPath.row]
           loadingControllers[indexPath] = controller
