@@ -12,41 +12,40 @@ final public class ListViewController: UITableViewController  {
   private(set) public var errorView = ErrorView()
   public var onRefresh: (() -> Void)?
   
-  private var loadingControllers = [IndexPath: CellController]()
-  
-  private var tableModel = [CellController]() {
-    didSet {
-      tableView.reloadData()
+  private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
+    .init(tableView: tableView) { (tableView, index, controller) in
+      controller.dataSource.tableView(tableView, cellForRowAt: index)
     }
-  }
+  }()
   
   public override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.dataSource = dataSource
     configureErrorView()
     refresh()
   }
   
   private func configureErrorView() {
-          let container = UIView()
-          container.backgroundColor = .clear
-          container.addSubview(errorView)
-          
-          errorView.translatesAutoresizingMaskIntoConstraints = false
-          NSLayoutConstraint.activate([
-              errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-              container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
-              errorView.topAnchor.constraint(equalTo: container.topAnchor),
-              container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
-          ])
-          
-          tableView.tableHeaderView = container
-          
-          errorView.onHide = { [weak self] in
-              self?.tableView.beginUpdates()
-              self?.tableView.sizeTableHeaderToFit()
-              self?.tableView.endUpdates()
-          }
-      }
+    let container = UIView()
+    container.backgroundColor = .clear
+    container.addSubview(errorView)
+    
+    errorView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+      container.trailingAnchor.constraint(equalTo: errorView.trailingAnchor),
+      errorView.topAnchor.constraint(equalTo: container.topAnchor),
+      container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
+    ])
+    
+    tableView.tableHeaderView = container
+    
+    errorView.onHide = { [weak self] in
+      self?.tableView.beginUpdates()
+      self?.tableView.sizeTableHeaderToFit()
+      self?.tableView.endUpdates()
+    }
+  }
   
   
   public override func viewIsAppearing(_ animated: Bool) {
@@ -61,12 +60,20 @@ final public class ListViewController: UITableViewController  {
     tableView.sizeTableHeaderToFit()
   }
   
+  public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
+    if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+      tableView.reloadData()
+    }
+  }
+  
   @IBAction private func refresh() {
     onRefresh?()
   }
   public func display(_ cellController: [CellController]) {
-    loadingControllers = [:]
-    tableModel = cellController
+    var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
+    snapshot.appendSections([0])
+    snapshot.appendItems(cellController, toSection: 0)
+    dataSource.apply(snapshot)
   }
 }
 
@@ -83,17 +90,9 @@ extension ListViewController: ResourceErrorView {
 }
 
 extension ListViewController {
-  public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tableModel.count
-  }
-  
-  public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let ds = cellController(forRowAt: indexPath).dataSource
-    return ds.tableView(tableView, cellForRowAt: indexPath)
-  }
   
   public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    let dl = removeLoadingController(forRowAt: indexPath)?.delegate
+    let dl = cellController(at: indexPath)?.delegate
     dl?.tableView?(tableView, didEndDisplaying: cell, forRowAt: indexPath)
   }
 }
@@ -101,29 +100,21 @@ extension ListViewController {
 extension ListViewController: UITableViewDataSourcePrefetching {
   public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
     indexPaths.forEach { indexPath in
-      let dsp = cellController(forRowAt: indexPath).dataSourcePrefetching
+      let dsp = cellController(at: indexPath)?.dataSourcePrefetching
+      
       dsp?.tableView(tableView, prefetchRowsAt: [indexPath])
     }
   }
   public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
     indexPaths.forEach { indexPath in
-      let dsp = removeLoadingController(forRowAt: indexPath)?.dataSourcePrefetching
-                dsp?.tableView?(tableView, cancelPrefetchingForRowsAt: [indexPath])
-            }
+      let dsp = cellController(at: indexPath)?.dataSourcePrefetching
+      dsp?.tableView?(tableView, cancelPrefetchingForRowsAt: [indexPath])
+    }
   }
 }
 //MARK: - Private Methods
 extension ListViewController {
-  private func cellController(forRowAt indexPath: IndexPath) -> CellController {
-    let controller = tableModel[indexPath.row]
-          loadingControllers[indexPath] = controller
-          return controller
-  }
-  
-  private func removeLoadingController(forRowAt indexPath: IndexPath) -> CellController? {
-    
-    let controller = loadingControllers[indexPath]
-      loadingControllers[indexPath] = nil
-    return controller
+  private func cellController(at indexPath: IndexPath) -> CellController? {
+    dataSource.itemIdentifier(for: indexPath)
   }
 }

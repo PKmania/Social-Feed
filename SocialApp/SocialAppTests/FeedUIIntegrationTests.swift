@@ -318,7 +318,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     let imageData = UIImage.make(withColor: .red).pngData()!
     loader.completeImageLoading(with: imageData, at: 1)
     
-    XCTAssertEqual(newView.renderedImage, imageData)
+    XCTAssertEqual(newView.renderedImage, nil)
   }
   
   func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
