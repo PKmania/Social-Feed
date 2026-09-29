@@ -15,38 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="FX1-Xj-RLf" customClass="ErrorView" customModule="SocialFeedIOS" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dm-qt-1O1">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="30"/>
-                                    <string key="text">Label
-fndkd</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" red="0.99951404330000004" green="0.41759261489999999" blue="0.4154433012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <gestureRecognizers/>
-                            <constraints>
-                                <constraint firstItem="1dm-qt-1O1" firstAttribute="top" secondItem="FX1-Xj-RLf" secondAttribute="top" id="4Na-MC-Fdd"/>
-                                <constraint firstAttribute="bottom" secondItem="1dm-qt-1O1" secondAttribute="bottom" constant="4" id="55B-5S-deC"/>
-                                <constraint firstAttribute="trailing" secondItem="1dm-qt-1O1" secondAttribute="trailing" id="L8J-10-mwV"/>
-                                <constraint firstItem="1dm-qt-1O1" firstAttribute="leading" secondItem="FX1-Xj-RLf" secondAttribute="leading" id="NJw-yP-98b"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="label" destination="1dm-qt-1O1" id="upU-6a-aDp"/>
-                            </connections>
-                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="FQJ-ri-l0g">
-                            <rect key="frame" x="0.0" y="660" width="393" height="16"/>
+                            <rect key="frame" x="0.0" y="626" width="393" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedImageCell" rowHeight="548" id="kc1-mB-FtD" customClass="FeedImageCell" customModule="SocialFeedIOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="393" height="548"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="548"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kc1-mB-FtD" id="IWu-nq-Mk3">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="548"/>
@@ -167,9 +142,6 @@ Location </string>
                             <action selector="refresh" destination="WPC-9b-x2E" eventType="valueChanged" id="93c-zO-ESc"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <outlet property="errorView" destination="FX1-Xj-RLf" id="Sdv-M9-62X"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4K-EC-jLg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

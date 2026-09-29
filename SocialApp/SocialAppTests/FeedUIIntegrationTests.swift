@@ -265,6 +265,19 @@ final class FeedUIIntegrationTests: XCTestCase {
     XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
   }
   
+  func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateErrorViewTap()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+  
   func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
     let (sut, loader) = makeSUT()
     sut.loadViewIfNeeded()
