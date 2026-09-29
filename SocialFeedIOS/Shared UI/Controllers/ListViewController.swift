@@ -45,7 +45,7 @@ final public class ListViewController: UITableViewController  {
   }
   
   @IBAction private func refresh() {
-    onRefresh!()
+    onRefresh?()
   }
   public func display(_ cellController: [CellController]) {
     loadingControllers = [:]
