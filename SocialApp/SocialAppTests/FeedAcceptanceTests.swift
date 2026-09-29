@@ -61,7 +61,7 @@ class FeedAcceptanceTests: XCTestCase {
     store: InMemoryFeedStore = .empty
   ) -> ListViewController {
     let sut = SceneDelegate(httpClient: httpClient, store: store)
-    sut.window = UIWindow()
+    sut.window = UIWindowSpy()
     sut.configureWindow()
     
     let nav = sut.window?.rootViewController as? UINavigationController
@@ -98,5 +98,13 @@ class FeedAcceptanceTests: XCTestCase {
       ["id": UUID().uuidString, "image": "http://image.com"]
     ]])
   }
+  
+  private class UIWindowSpy: UIWindow {
+      var makeKeyAndVisibleCallCount = 0
+      
+      override func makeKeyAndVisible() {
+        makeKeyAndVisibleCallCount = 1
+      }
+    }
   
 }

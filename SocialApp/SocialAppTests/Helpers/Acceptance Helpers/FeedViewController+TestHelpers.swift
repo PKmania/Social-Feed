@@ -10,13 +10,7 @@ import SocialFeedIOS
 import UIKit
 
 extension ListViewController {
-  
-  public override func loadViewIfNeeded() {
-         super.loadViewIfNeeded()
-         
-         tableView.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-     }
-  
+    
   func simulateUserInitiatedFeedReload() {
     
     refreshControl?.simulatePullToRefresh()
@@ -88,11 +82,21 @@ extension ListViewController {
   func simulateAppearance() {
     if !isViewLoaded {
       loadViewIfNeeded()
-      replaceRefreshControlWithFake()
+      prepareForFirstAppearance()
     }
     beginAppearanceTransition(true, animated: false)
     endAppearanceTransition()
   }
+  
+  private func prepareForFirstAppearance() {
+      setSmallFrameToPreventRenderingCells()
+    replaceRefreshControlWithFake()
+    }
+    
+    private func setSmallFrameToPreventRenderingCells() {
+//      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
+    }
+  
   func replaceRefreshControlWithFake() {
     let fake = FakeUIRefreshControl()
     refreshControl?.allTargets.forEach { target in

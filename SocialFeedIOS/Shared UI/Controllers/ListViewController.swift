@@ -21,6 +21,7 @@ final public class ListViewController: UITableViewController  {
   public override func viewDidLoad() {
     super.viewDidLoad()
     configureTableView()
+    configureTraitCollectionObservers()
     refresh()
   }
   
@@ -49,11 +50,13 @@ final public class ListViewController: UITableViewController  {
     tableView.sizeTableHeaderToFit()
   }
   
-  public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
-    if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
-      tableView.reloadData()
+  private func configureTraitCollectionObservers() {
+      registerForTraitChanges(
+        [UITraitPreferredContentSizeCategory.self]
+      ) { (self: Self, previous: UITraitCollection) in
+        self.tableView.reloadData()
+      }
     }
-  }
   
   @IBAction private func refresh() {
     onRefresh?()
