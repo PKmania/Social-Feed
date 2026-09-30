@@ -13,19 +13,19 @@ struct SnapshotConfiguration {
     let layoutMargins: UIEdgeInsets
     let traitCollection: UITraitCollection
     
-    static func iPhone17(style: UIUserInterfaceStyle) -> SnapshotConfiguration {
+    static func iPhone17(style: UIUserInterfaceStyle, contentSize: UIContentSizeCategory = .medium) -> SnapshotConfiguration {
         let traits = UITraitCollection { mutableTraits in
             mutableTraits.forceTouchCapability = .unavailable
             mutableTraits.layoutDirection = .leftToRight
-            mutableTraits.preferredContentSizeCategory = .medium
+            mutableTraits.preferredContentSizeCategory = contentSize
             mutableTraits.userInterfaceIdiom = .phone
             mutableTraits.horizontalSizeClass = .compact
             mutableTraits.verticalSizeClass = .regular
             mutableTraits.displayScale = 3
+            mutableTraits.accessibilityContrast = .normal
             mutableTraits.displayGamut = .P3
             mutableTraits.userInterfaceStyle = style
         }
-        
         return SnapshotConfiguration(
             size: CGSize(width: 402, height: 874),
             safeAreaInsets: UIEdgeInsets(top: 59, left: 0, bottom: 34, right: 0),
@@ -59,17 +59,7 @@ private final class SnapshotWindow: UIWindow {
     }
     
     override var traitCollection: UITraitCollection {
-        return super.traitCollection.modifyingTraits { mutableTraits in
-            mutableTraits.forceTouchCapability = configuration.traitCollection.forceTouchCapability
-            mutableTraits.layoutDirection = configuration.traitCollection.layoutDirection
-            mutableTraits.preferredContentSizeCategory = configuration.traitCollection.preferredContentSizeCategory
-            mutableTraits.userInterfaceIdiom = configuration.traitCollection.userInterfaceIdiom
-            mutableTraits.horizontalSizeClass = configuration.traitCollection.horizontalSizeClass
-            mutableTraits.verticalSizeClass = configuration.traitCollection.verticalSizeClass
-            mutableTraits.displayScale = configuration.traitCollection.displayScale
-            mutableTraits.displayGamut = configuration.traitCollection.displayGamut
-            mutableTraits.userInterfaceStyle = configuration.traitCollection.userInterfaceStyle
-        }
+      configuration.traitCollection
     }
 
     func snapshot() -> UIImage {

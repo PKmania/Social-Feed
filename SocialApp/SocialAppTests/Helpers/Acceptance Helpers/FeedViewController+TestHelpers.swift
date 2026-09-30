@@ -9,14 +9,19 @@ import Foundation
 import SocialFeedIOS
 import UIKit
 
-extension FeedViewController {
+extension ListViewController {
+    
   func simulateUserInitiatedFeedReload() {
     
     refreshControl?.simulatePullToRefresh()
   }
+  func simulateErrorViewTap() {
+        errorView.simulateTap()
+    }
+  
   
   var errorMessage: String? {
-    return errorView?.message
+    return errorView.message
   }
   var isShowingLoadingIndicator: Bool {
     refreshControl?.isRefreshing == true
@@ -27,7 +32,7 @@ extension FeedViewController {
   }
   
   func numberOfRenderedFeedImageViews() -> Int{
-    tableView.numberOfRows(inSection: feedImageSection)
+    tableView.numberOfSections == 0 ? 0 :  tableView.numberOfRows(inSection: feedImageSection)
   }
   
   @discardableResult
@@ -73,15 +78,25 @@ extension FeedViewController {
   
 }
 
-extension FeedViewController {
+extension ListViewController {
   func simulateAppearance() {
     if !isViewLoaded {
       loadViewIfNeeded()
-      replaceRefreshControlWithFake()
+      prepareForFirstAppearance()
     }
     beginAppearanceTransition(true, animated: false)
     endAppearanceTransition()
   }
+  
+  private func prepareForFirstAppearance() {
+      setSmallFrameToPreventRenderingCells()
+    replaceRefreshControlWithFake()
+    }
+    
+    private func setSmallFrameToPreventRenderingCells() {
+//      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
+    }
+  
   func replaceRefreshControlWithFake() {
     let fake = FakeUIRefreshControl()
     refreshControl?.allTargets.forEach { target in

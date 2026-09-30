@@ -59,13 +59,13 @@ class FeedAcceptanceTests: XCTestCase {
   private func launch(
     httpClient: HTTPClientStub = .offline,
     store: InMemoryFeedStore = .empty
-  ) -> FeedViewController {
+  ) -> ListViewController {
     let sut = SceneDelegate(httpClient: httpClient, store: store)
-    sut.window = UIWindow()
+    sut.window = UIWindowSpy()
     sut.configureWindow()
     
     let nav = sut.window?.rootViewController as? UINavigationController
-    return nav?.topViewController as! FeedViewController
+    return nav?.topViewController as! ListViewController
   }
   
   private func enterBackground(with store: InMemoryFeedStore) {
@@ -98,5 +98,13 @@ class FeedAcceptanceTests: XCTestCase {
       ["id": UUID().uuidString, "image": "http://image.com"]
     ]])
   }
+  
+  private class UIWindowSpy: UIWindow {
+      var makeKeyAndVisibleCallCount = 0
+      
+      override func makeKeyAndVisible() {
+        makeKeyAndVisibleCallCount = 1
+      }
+    }
   
 }

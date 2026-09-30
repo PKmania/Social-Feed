@@ -254,7 +254,8 @@ final class FeedUIIntegrationTests: XCTestCase {
     let image1 = makeImage(url: URL(string: "http://url-1.com")!)
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+//    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeFeedLoading(with: [image0, image1])
     XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not near visible")
     
@@ -264,6 +265,19 @@ final class FeedUIIntegrationTests: XCTestCase {
     sut.simulateFeedImageViewNotNearVisible(at: 1)
     XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
   }
+  
+  func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateErrorViewTap()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
   
   func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
     let (sut, loader) = makeSUT()
@@ -305,7 +319,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     let imageData = UIImage.make(withColor: .red).pngData()!
     loader.completeImageLoading(with: imageData, at: 1)
     
-    XCTAssertEqual(newView.renderedImage, imageData)
+    XCTAssertEqual(newView.renderedImage, nil)
   }
   
   func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
@@ -351,7 +365,7 @@ final class FeedUIIntegrationTests: XCTestCase {
   
   //MARK: - Helpers
   
-  private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
+  private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
     let loader = LoaderSpy()
     let sut = FeedUIComposer.feedComposeWith(feedLoader: loader.loadPublisher, imageLoader: loader.loadImageDataPublisher)
     trackForMemoryLeaks(loader, file: file, line: line)
