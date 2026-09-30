@@ -13,7 +13,7 @@ class FeedUIIntegrationTests: XCTestCase {
   func test_feedView_hasTitle() {
     let (sut, _) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     
     XCTAssertEqual(sut.title, feedTitle)
   }
@@ -23,7 +23,7 @@ class FeedUIIntegrationTests: XCTestCase {
     
     XCTAssertEqual(loader.loadFeedCallCount, 0, "Expected no loading requests before view is loaded")
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
     
     sut.simulateUserInitiatedReload()
@@ -57,7 +57,7 @@ class FeedUIIntegrationTests: XCTestCase {
     let image3 = makeImage(description: nil, location: nil)
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     
     XCTAssertEqual(sut.numberOfRenderedFeedImageViews(), 0)
     
@@ -74,7 +74,7 @@ class FeedUIIntegrationTests: XCTestCase {
     let image0 = makeImage()
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeFeedLoading(with: [image0], at: 0)
     assertThat(sut, isRendering: [image0])
     
@@ -98,7 +98,7 @@ class FeedUIIntegrationTests: XCTestCase {
   func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     
     XCTAssertEqual(sut.errorMessage, nil)
     
@@ -282,7 +282,7 @@ class FeedUIIntegrationTests: XCTestCase {
   func test_tapOnErrorView_hidesErrorMessage() {
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     XCTAssertEqual(sut.errorMessage, nil)
     
     loader.completeFeedLoadingWithError(at: 0)
@@ -294,7 +294,7 @@ class FeedUIIntegrationTests: XCTestCase {
   
   func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
     let (sut, loader) = makeSUT()
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeFeedLoading(with: [makeImage()])
     
     let view = sut.simulateFeedImageViewNotVisible(at: 0)
@@ -338,7 +338,7 @@ class FeedUIIntegrationTests: XCTestCase {
   func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeFeedLoading(with: [makeImage()])
     _ = sut.simulateFeedImageViewVisible(at: 0)
     
@@ -355,7 +355,7 @@ class FeedUIIntegrationTests: XCTestCase {
     let image1 = makeImage()
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeFeedLoading(with: [image0, image1], at: 0)
     assertThat(sut, isRendering: [image0, image1])
     
@@ -364,11 +364,35 @@ class FeedUIIntegrationTests: XCTestCase {
     assertThat(sut, isRendering: [])
   }
   
+  func test_imageSelection_notifiesHandler() {
+       let image0 = makeImage()
+       let image1 = makeImage()
+       var selectedImages = [FeedImage]()
+       let (sut, loader) = makeSUT(selection: { selectedImages.append($0) })
+       
+       sut.simulateAppearance()
+       loader.completeFeedLoading(with: [image0, image1], at: 0)
+
+       sut.simulateTapOnFeedImage(at: 0)
+       XCTAssertEqual(selectedImages, [image0])
+       
+       sut.simulateTapOnFeedImage(at: 1)
+       XCTAssertEqual(selectedImages, [image0, image1])
+   }
+  
   //MARK: - Helpers
   
-  private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
+  private func makeSUT(
+    selection: @escaping (FeedImage) -> Void = { _ in },
+    file: StaticString = #file,
+    line: UInt = #line
+  ) -> (sut: ListViewController, loader: LoaderSpy) {
     let loader = LoaderSpy()
-    let sut = FeedUIComposer.feedComposeWith(feedLoader: loader.loadPublisher, imageLoader: loader.loadImageDataPublisher)
+    let sut = FeedUIComposer.feedComposeWith(
+      feedLoader: loader.loadPublisher,
+      imageLoader: loader.loadImageDataPublisher,
+      selection: selection
+    )
     trackForMemoryLeaks(loader, file: file, line: line)
     trackForMemoryLeaks(sut, file: file, line: line)
     return (sut, loader)
