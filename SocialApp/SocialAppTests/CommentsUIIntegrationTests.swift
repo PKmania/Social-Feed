@@ -86,7 +86,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
     let comment = makeComment()
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     loader.completeCommentsLoading(with: [comment], at: 0)
     assertThat(sut, isRendering: [comment])
     
@@ -95,9 +95,9 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
     assertThat(sut, isRendering: [comment])
   }
   
-  override func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
+   func test_loadCommentsCompletion_dispatchesFromBackgroundToMainThread() {
     let (sut, loader) = makeSUT()
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     
     let exp = expectation(description: "Wait for background queue")
     DispatchQueue.global().async {
@@ -110,7 +110,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
   override func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     XCTAssertEqual(sut.errorMessage, nil)
     
     loader.completeCommentsLoadingWithError(at: 0)
@@ -123,7 +123,7 @@ class CommentsUIIntegrationTests: FeedUIIntegrationTests {
   override func test_tapOnErrorView_hidesErrorMessage() {
     let (sut, loader) = makeSUT()
     
-    sut.loadViewIfNeeded()
+    sut.simulateAppearance()
     XCTAssertEqual(sut.errorMessage, nil)
     
     loader.completeCommentsLoadingWithError(at: 0)
