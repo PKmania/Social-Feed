@@ -10,19 +10,20 @@ import SocialFeedIOS
 import UIKit
 
 extension ListViewController {
-    
+  
   func simulateUserInitiatedFeedReload() {
     
     refreshControl?.simulatePullToRefresh()
   }
-  func simulateErrorViewTap() {
-        errorView.simulateTap()
-    }
   
+  func simulateErrorViewTap() {
+    errorView.simulateTap()
+  }
   
   var errorMessage: String? {
     return errorView.message
   }
+  
   var isShowingLoadingIndicator: Bool {
     refreshControl?.isRefreshing == true
   }
@@ -73,8 +74,8 @@ extension ListViewController {
   }
   
   func renderedFeedImageData(at index: Int) -> Data? {
-      return simulateFeedImageViewVisible(at: index)?.renderedImage
-    }
+    return simulateFeedImageViewVisible(at: index)?.renderedImage
+  }
   
 }
 
@@ -89,13 +90,13 @@ extension ListViewController {
   }
   
   private func prepareForFirstAppearance() {
-      setSmallFrameToPreventRenderingCells()
+    setSmallFrameToPreventRenderingCells()
     replaceRefreshControlWithFake()
-    }
-    
-    private func setSmallFrameToPreventRenderingCells() {
-//      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
-    }
+  }
+  
+  private func setSmallFrameToPreventRenderingCells() {
+    //      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
+  }
   
   func replaceRefreshControlWithFake() {
     let fake = FakeUIRefreshControl()
