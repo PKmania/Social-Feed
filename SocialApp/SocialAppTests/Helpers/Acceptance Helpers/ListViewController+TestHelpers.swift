@@ -10,19 +10,19 @@ import SocialFeedIOS
 import UIKit
 
 extension ListViewController {
-    
-  func simulateUserInitiatedFeedReload() {
-    
+  
+  func simulateUserInitiatedReload() {
     refreshControl?.simulatePullToRefresh()
   }
-  func simulateErrorViewTap() {
-        errorView.simulateTap()
-    }
   
+  func simulateErrorViewTap() {
+    errorView.simulateTap()
+  }
   
   var errorMessage: String? {
     return errorView.message
   }
+  
   var isShowingLoadingIndicator: Bool {
     refreshControl?.isRefreshing == true
   }
@@ -73,8 +73,59 @@ extension ListViewController {
   }
   
   func renderedFeedImageData(at index: Int) -> Data? {
-      return simulateFeedImageViewVisible(at: index)?.renderedImage
+    return simulateFeedImageViewVisible(at: index)?.renderedImage
+  }
+  
+  func simulateTapOnFeedImage(at row: Int) {
+    let delegate = tableView.delegate
+    let index = IndexPath(row: row, section: feedImageSection)
+    delegate?.tableView?(tableView, didSelectRowAt: index)
+  }
+  
+  func numberOfRows(in section: Int) -> Int {
+    tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section) : 0
+  }
+  
+  func cell(row: Int, section: Int) -> UITableViewCell? {
+    guard numberOfRows(in: section) > row else {
+      return nil
     }
+    let ds = tableView.dataSource
+    let index = IndexPath(row: row, section: section)
+    return ds?.tableView(tableView, cellForRowAt: index)
+  }
+}
+
+extension ListViewController {
+  func numberOfRenderedComments() -> Int {
+    numberOfRows(in: commentsSection)
+  }
+  
+  func commentMessage(at row: Int) -> String? {
+    commentView(at: row)?.messageLabel.text
+  }
+  
+  func commentDate(at row: Int) -> String? {
+    commentView(at: row)?.dateLabel.text
+  }
+  
+  func commentUsername(at row: Int) -> String? {
+    commentView(at: row)?.usernameLabel.text
+  }
+  
+  private func commentView(at row: Int) -> ImageCommentCell? {
+    guard numberOfRenderedComments() > row else {
+      return nil
+    }
+    let ds = tableView.dataSource
+    let index = IndexPath(row: row, section: commentsSection)
+    return ds?.tableView(tableView, cellForRowAt: index) as? ImageCommentCell
+  }
+  
+  private var commentsSection: Int {
+    return 0
+  }
+  
   
 }
 
@@ -89,13 +140,13 @@ extension ListViewController {
   }
   
   private func prepareForFirstAppearance() {
-      setSmallFrameToPreventRenderingCells()
+    setSmallFrameToPreventRenderingCells()
     replaceRefreshControlWithFake()
-    }
-    
-    private func setSmallFrameToPreventRenderingCells() {
-//      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
-    }
+  }
+  
+  private func setSmallFrameToPreventRenderingCells() {
+    //      tableView.frame = CGRect(x: 0, y: 0, width: 390, height: 1)
+  }
   
   func replaceRefreshControlWithFake() {
     let fake = FakeUIRefreshControl()
